@@ -1,0 +1,373 @@
+<?php
+/**
+ * This file is found in controller section of the codeigniter application directory
+ *
+ */
+
+
+/**
+ * Controller for default domain. 
+ *
+ * Viewable as:
+ * {@link http://www.prospace.com}
+ * {@link http://www.prospace.com/index.php/page}
+ * {@link http://www.prospace.com/index.php/page/index}
+ *
+ * @autoloaded YES
+ * @path /system/application/controllers/page.php
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @copyright 2010 Prospace LLC
+ * @version 1.0 Alpha
+ * @todo 
+ * 
+ */
+class Page extends Controller {
+	
+	private $contents;
+	private $default_content;
+
+	function Page(){
+		parent::Controller();	
+
+		
+		$select_what =  '*';
+		
+		$where_array = array('product_id' => 1);
+	
+		$this->contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
+		
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$this->default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
+
+
+	}
+	
+
+	/**
+	 * index
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/index
+	 * @access public
+	 **/ 
+	
+	function index(){
+		
+
+		$data = array('default_content' => $this->default_content, 'contents' => $this->contents);
+
+		$this->load->view('page/about_view', $data);
+	
+	}	
+	
+
+
+	/**
+	 * frame_edit
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/frame_edit
+	 * @access public
+	 **/ 
+	
+	function frame_edit(){
+		
+		$data = array();
+
+		$this->load->view('page/frame_edit_view', $data);
+	
+	}	
+
+
+
+/**
+ * edit_panel
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @path /index.php/page/edit_panel
+ * @access public
+ **/ 
+
+function edit_panel(){
+	
+	$this->load->view('header/edit_panel_view');
+	
+	
+}
+
+/**
+ * iframe of WYSIWIG
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @path /index.php/page/wysiwig
+ * @access public
+ **/ 
+ 
+ 
+ 
+
+function wysiwyg(){
+	$table = $this->uri->segment(3);
+	$field = $this->uri->segment(4);
+
+	$data = array('table' => $table, 'field' =>  $field);
+	
+	$this->load->view('iframe/wysiwyg_view', $data);
+	
+}
+
+
+/**
+ * update
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @uses My_database_model::create_table_with_fields()
+ * @uses My_database_model::check_if_exist()
+ * @uses My_database_model::add_column_to_table_if_exist()
+ * @uses My_database_model::insert_table()
+ * @uses My_database_model::get_primary_key()
+ * @uses My_database_model::update_table()
+ * @path /index.php/dashboard/update
+ * @access public
+ **/ 
+
+function update(){
+	
+	$table = 'contents';
+	$field = $this->input->post('field');
+	$text = $this->input->post('text');
+	$product_id = $this->input->post('product_id');
+
+	/**
+	 * Set up the table and the fields
+	 *
+	 **/ 
+
+	$fields_array = array(
+	                        'id' => array(
+	                                                 'type' => 'INT',
+	                                                 'unsigned' => TRUE,
+	                                                 'auto_increment' => TRUE
+	                                      ),
+	                        'product_id' => array(
+	                                                 'type' => 'INT',
+	                                                 'unsigned' => TRUE
+	                                      ),
+	                        'created' => array(
+	                                                 'type' => 'DATETIME'
+	                                        ),
+	                        'updated' => array(
+	                                                 'type' => 'DATETIME'
+	                                        )  
+	                );
+	                
+	$primary_key = 'id';
+	
+	$this->my_database_model->create_table_with_fields($table, $primary_key, $fields_array);
+	
+	$fields_array = array(
+	                        $field => array(
+	                                                 'type' => 'BLOB'
+	                                        )                                      
+	                );
+	
+	$this->my_database_model->add_column_to_table_if_exist($table, $fields_array);
+	
+		 
+	/**
+	 * Insert into table if not already exist otherwise do an update
+	 *
+	 **/ 
+	 
+  $where_array = array('product_id' => $product_id);
+	$table = 'contents';
+
+  if( $this->my_database_model->check_if_exist($where_array, $table) ){
+  	
+  	
+			$primary_key = $this->my_database_model->get_primary_key( $table, $where_field = 'product_id', $product_id);
+     
+			$set_what_array = array(
+									$field => $text,
+									'product_id' => $product_id
+									);			
+							
+			$this->my_database_model->update_table( $table, $primary_key, $set_what_array );
+
+
+     
+  }else{
+      
+				$insert_what = array(
+							$field => $text,
+							'product_id' => $product_id
+							);	
+				
+				$primary_key = $this->my_database_model->insert_table(
+												$table, 
+												$insert_what
+												); 
+      
+  };
+	 
+
+	 
+	 
+	 
+	 // ******** DEFAULT contents
+	 
+	 
+	$table = 'default_content';
+	$field = $this->input->post('field');
+	$text = $this->input->post('text');
+
+	/**
+	 * Set up the table and the fields
+	 *
+	 **/ 
+
+	$fields_array = array(
+	                        'id' => array(
+	                                                 'type' => 'INT',
+	                                                 'unsigned' => TRUE,
+	                                                 'auto_increment' => TRUE
+	                                      ),
+	                        'created' => array(
+	                                                 'type' => 'DATETIME'
+	                                        ),
+	                        'updated' => array(
+	                                                 'type' => 'DATETIME'
+	                                        )  
+	                );
+	                
+	$primary_key = 'id';
+	
+	$this->my_database_model->create_table_with_fields($table, $primary_key, $fields_array);
+	
+	$fields_array = array(
+	                        $field => array(
+	                                                 'type' => 'BLOB'
+	                                        )                                      
+	                );
+	
+	$this->my_database_model->add_column_to_table_if_exist($table, $fields_array);
+	
+	
+	/**
+	 * Insert into table if not already exist otherwise do an update
+	 *
+	 **/ 
+	 
+  
+			
+	if( $this->my_database_model->get_primary_key( $table, $where_field = $primary_key, '1') == 1){
+
+			$set_what_array = array(
+									$field => $text
+									);			
+							
+			$this->my_database_model->update_table( $table, '1', $set_what_array );
+
+	}else{
+
+				$insert_what = array(
+							$field => $text
+							);	
+				
+				$primary_key = $this->my_database_model->insert_table(
+												$table, 
+												$insert_what
+												); 
+
+	};
+
+
+	
+}
+
+
+
+
+/**
+ * get
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @uses My_database_model::select_from_table()
+ * @path /index.php/dashboard/get
+ * @access public
+ **/ 
+
+function get(){
+	
+	$product_id = $this->input->post('product_id');
+	$table = 'contents';
+	$field = $this->input->post('field');
+
+
+	if( $this->db->field_exists($field, $table ) == TRUE){
+	
+		$select_what =  $field;
+		
+		$where_array = array('product_id' => $product_id );
+	
+		$files = $this->my_database_model->select_from_table( 
+		$table, $select_what, $where_array );
+		
+		if( isset( $files ) && count($files) > 0 && $files[0]->$field != ''){
+				echo $files[0]->$field;			
+		}else{
+				
+						$table = 'default_content';
+						$field = $this->input->post('field');				
+				
+						$select_what =  $field;
+						
+						$where_array = array('id' => '1' );
+					
+						$files = $this->my_database_model->select_from_table( 
+						$table, $select_what, $where_array );	
+						
+						echo $files[0]->$field;	
+				
+		};
+		
+	}
+	else{
+		
+			$table = 'default_content';
+			$field = $this->input->post('field');				
+	
+			$select_what =  $field;
+			
+			$where_array = array('id' => '1' );
+		
+			$files = $this->my_database_model->select_from_table( 
+			$table, $select_what, $where_array );	
+			
+			echo $files[0]->$field;	
+			
+	}
+	
+}
+
+}
+
+/* End of file home.php */
+/* Location: ./system/application/controllers/home.php */
