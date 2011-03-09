@@ -50,7 +50,7 @@ logo
 		
 		<div id='tabs' class='container '   >
 			<ul   >
-				<li id='about'  class='menu_item ' >About</li>		
+				<li id='index'  class='menu_item ' >About</li>		
 
 				<li id='resume' class='menu_item ' >Resume</li>						
 				<li id='thumbs'  class='menu_item ' >Photos</li>

@@ -16,9 +16,9 @@
 
 						if(  window.parent.document.getElementById('top_edit_frame')  && window.parent.top_edit_frame.$('#switch').val() == 0){  // EDIT MODE
 					  	
-								$('.profile_image_link').css({cursor:'pointer'})
+								$('.product_image_link').css({cursor:'pointer'})
 								.fancyZoom().click(function(event) {
-									$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/dashboard/upload_image_form');
+									$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + $('#product_id').val());
 								});		
 								
 								
@@ -124,7 +124,7 @@
 	
 <div  class=' container'   style='height:200px;padding-top:30px'  >
 	
-	<div id='profile_image_container' class=' span-5'  >
+	<div id='product_image_container' class=' span-5'  >
 		
 		<!-- 
 		/**
@@ -138,7 +138,7 @@
 	  	display:none;
 	  	'  >
 	  	<a  style='margin-top:9px;margin-right:59px;' >
-	  	<img href="#profile_image"   class="profile_image_link edit_png"  src='<?php echo base_url();    ?>images/edit.png'>
+	  	<img href="#product_image"   class="product_image_link edit_png"  src='<?php echo base_url();    ?>images/edit.png'>
 	  	</a>
 	  	
 	  </div>	
@@ -147,7 +147,7 @@
 
 		<div     >
 			
-					<img id='profile_img'   style='margin-top:-29px'  src='<?php 
+					<img id='product_img'   style='margin-top:-29px'  src='<?php 
 					
 //					if(   is_file('uploads/user_profile_image/' . $this->session->userdata['user_id'] . '/image.png')   ){
 //			
@@ -194,7 +194,7 @@
 	
 	<?php  $this->load->view('footer/footer.php');   ?>
 
-	<div id="profile_image"  style='height:60px;display:none'  >
+	<div id="product_image"  style='height:60px;display:none'  >
 		<iframe id="iframe_content_image"   style="
 			width:400px;
 			height:40px;

@@ -30,9 +30,9 @@
 								window.parent.bottom_edit_frame.$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/wysiwyg');
 							});
 							
-							window.parent.bottom_edit_frame.$('.profile_image_link').css({cursor:'pointer'})
+							window.parent.bottom_edit_frame.$('.product_image_link').css({cursor:'pointer'})
 							.fancyZoom().click(function(event) {
-								window.parent.bottom_edit_frame.$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/dashboard/upload_image_form');
+								window.parent.bottom_edit_frame.$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + window.parent.bottom_edit_frame.$('#product_id').val());
 							});		
 
 					  	$('#switch').val('0');
@@ -82,6 +82,10 @@
 							});
 						
 					});
+					
+					
+					window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>uploads/product_images/' +  $('#product_id option:selected').text() +  '/image.png?random=<?php echo rand();    ?>')
+					
 
 		    });
 						
