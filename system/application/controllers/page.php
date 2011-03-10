@@ -410,7 +410,7 @@ function upload_image_form(){
  * {@source }
  * @package BackEnd
  * @author James Ming <jamesming@gmail.com>
- * @path /index.php/dashboard/upload_image
+ * @path /index.php/page/upload_image
  * @access public
  **/ 
 
@@ -459,7 +459,7 @@ function upload_image(){
  * {@source }
  * @package BackEnd
  * @author James Ming <jamesming@gmail.com>
- * @path /index.php/dashboard/get_product_image
+ * @path /index.php/page/get_product_image
  * @access public
  **/ 
 
@@ -478,7 +478,7 @@ function does_product_image_exit(){
  * {@source }
  * @package BackEnd
  * @author James Ming <jamesming@gmail.com>
- * @path /index.php/dashboard/calendar
+ * @path /index.php/page/calendar
  * @access public
  **/ 
 
@@ -549,7 +549,7 @@ function calendar(){
  * {@source }
  * @package BackEnd
  * @author James Ming <jamesming@gmail.com>
- * @path /index.php/dashboard/update_deal_with_date
+ * @path /index.php/page/update_deal_with_date
  * @access public
  **/ 
 
@@ -584,7 +584,140 @@ function update_contents_with_date(){
 	
 }
 
+
+/**
+ * iframe_form_to_add_or_edit_product
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @path /index.php/page/iframe_form_to_add_or_edit_product
+ * @access public
+ **/ 
+
+	function iframe_form_to_add_or_edit_product(){
+	
+		$product_id = $this->uri->segment(3);
+		
+		if( $product_id > 0){
+			
+			$select_what =  '*';
+			
+			$where_array = array('id' => $product_id);
+		
+			$product = $this->my_database_model->select_from_table( $table = 'products', $select_what, $where_array );
+						
+			$name = $product[0]->name;
+			$price = $product[0]->price;
+			$discount = $product[0]->discount;
+			
+		}else{
+			
+			$name = '';
+			$price = '';
+			$discount = '';
+			
+		};
+	
+		$data= array('product_id' => $product_id, 'name' => $name, 'price' => $price, 'discount' => $discount);
+		
+		$this->load->view('iframe/iframe_form_to_add_or_edit_product_view', $data);
+	}
+
+
+
+/**
+ * iframe_form_to_add_or_edit_product
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @path /index.php/page/iframe_form_to_add_or_edit_product
+ * @access public
+ **/ 
+ 
+ 
+ function add_or_update_product(){
+	
+		$fields_array = array(
+		                        'id' => array(
+		                                                 'type' => 'INT',
+		                                                 'unsigned' => TRUE,
+		                                                 'auto_increment' => TRUE
+		                                      ),
+		                        'created' => array(
+		                                                 'type' => 'DATETIME'
+		                                        ),
+		                        'updated' => array(
+		                                                 'type' => 'DATETIME'
+		                                        )  
+		                );
+		                
+		$primary_key = 'id';
+		
+		$this->my_database_model->create_table_with_fields($table='products', $primary_key, $fields_array);
+		
+		$fields_array = array(
+		                        'name' => array(
+		                                                 'type' => 'varchar(255)'
+		                                        ),   
+		                        'price' => array(
+		                                                 'type' => 'decimal(2)'
+		                                        ),   
+		                        'discount' => array(
+		                                                 'type' => 'decimal(2)'
+		                                        )                                    
+		                );
+		
+		$this->my_database_model->add_column_to_table_if_exist($table, $fields_array);
+		
+		
+		/**
+		 * Insert into table if not already exist otherwise do an update
+		 *
+		 **/ 
+		 
+		 
+		 
+	  $where_array = array('id' => $this->input->post('product_id'));
+		$table = 'products';
+
+	  if( $this->my_database_model->check_if_exist($where_array, $table) ){
+	     
+					$set_what_array = array(
+									'name' => $this->input->post('name'),
+									'price' => $this->input->post('price'),
+									'discount' => $this->input->post('discount')
+											);			
+								
+					echo  $this->my_database_model->update_table( $table, $primary_key = $this->input->post('product_id'), $set_what_array );
+	
+	
+	     
+	  }else{
+		
+					$insert_what = array(
+								'name' => $this->input->post('name'),
+								'price' => $this->input->post('price'),
+								'discount' => $this->input->post('discount')
+								);	
+					
+					echo  $this->my_database_model->insert_table(
+													$table = 'products', 
+													$insert_what
+													); 
+		}
+	
+	}
+
+
 }
+
+
+
+
+
+
 
 /* End of file home.php */
 /* Location: ./system/application/controllers/home.php */

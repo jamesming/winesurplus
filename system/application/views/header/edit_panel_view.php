@@ -15,8 +15,18 @@
 				});		
 				
 				$('#calendar').click(function(event) {
-					window.parent.bottom_edit_frame.$('#logo_img').click()
-				});						
+					window.parent.bottom_edit_frame.$('#calendar').click()
+				});			
+				
+				$('#add_product').click(function(event) {
+					window.parent.bottom_edit_frame.$('#add_product').click()
+				});
+				
+				$('#edit_product').click(function(event) {
+					window.parent.bottom_edit_frame.$('#edit_product').click()
+				});											
+				
+							
 				
 				$('#clickme').click(function(event) {
 					
@@ -144,10 +154,12 @@
 	color:white;
 	text-align:center;
 	height:20px;
-	margin:10px;
-	border:1px solid red;
+	margin-left:10px;
+	margin-top:4px;
+	padding-top:2px;
 	float:left;
 	vertical-align:middle;
+	font-weight:bold;
 }
 
 </style>
@@ -156,21 +168,22 @@
 	<div  class='container '    >
 		<table   style='height:60px;border:0px solid gray'  >
 			<tr>
-				<td width=80% style='vertical-align:middle'>
+				<td width=50% style='vertical-align:middle'>
 					
 					
 							<div id='clickme'  class='div_buttons rounded_border'     >edit mode</div>
 							
-							<div id='calendar'  class='div_buttons rounded_border'   style='background:purple;border:1px solid blue'  >book deal</div>
+							<div id='calendar'  class='div_buttons rounded_border'   style='background:purple;'  >book deal</div>
 							
-							<div id='publish'  class='div_buttons rounded_border'    style='background:green;border:1px solid blue'>publish</div>  
+							<div id='publish'  class='div_buttons rounded_border'    style='background:darkgreen;'>publish</div>  
 					
 							
-							<div id='logout'   class='div_buttons rounded_border'   style='background:pink'   >logout</div>
+							<div id='logout'   class='div_buttons rounded_border'   style='background:red'   >logout</div>
 					
-							<div id='error'  class='div_buttons'    style='height:50px;background:lightgray;border:1px solid gray'>error log</div>  
+
+							<div id='add_product'  class='div_buttons rounded_border'   style='background:lightgreen;'  >add deal</div>
+							<div id='edit_product'  class='div_buttons rounded_border'   style='background:lightgreen;'  >edit deal</div>
 												
-					
 				</td>
 				<td>
 							
@@ -185,6 +198,12 @@
 						
 					</select>
 				</td>
+				
+				
+				<td>
+												<div id='error'  class='div_buttons'    style='height:50px;background:lightgray;border:1px solid gray'>error log</div>  
+				</td>	
+
 				
 
 			</tr>

@@ -5,9 +5,15 @@
 					$(document).ready(function() { 
 						
 						if(  window.parent.document.getElementById('top_edit_frame')  ){  
-								$('#logo_img').addClass('cursor_pointer').fancyZoom().click(function(event) {
+								$('#calendar').fancyZoom().click(function(event) {
 										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/calendar/' + $('#content_id').val() );
-								});		
+								});	
+								$('#add_product').fancyZoom().click(function(event) {
+										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' );
+								});			
+								$('#edit_product').fancyZoom().click(function(event) {
+										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' + $('#product_id').val() );
+								});									
 						};
 						
 						$('.menu_item').click(function(event) {
@@ -48,6 +54,13 @@ chrome hack: <input id="hack_to_fix_chrome_bug" type="text" value=""><br>
 div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 	p: <input id="product_id" type="text" value="<?php  echo $contents[0]->product_id;   ?>"><br>
 	c: <input id="content_id" type="text" value="<?php  echo $contents[0]->id;   ?>">	
+</div>
+
+<div id='calendar'  href='#wysiwyg_div'  style='display:none'  >
+</div>
+<div id='add_product'  href='#wysiwyg_div'  style='display:none'  >
+</div>
+<div id='edit_product'  href='#wysiwyg_div'  style='display:none'  >
 </div>
 
 <div  id='top_area' style='background:white'  >
