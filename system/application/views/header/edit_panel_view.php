@@ -64,10 +64,14 @@
 				
 				$('#product_id').change(function() {
 					
-					window.parent.bottom_edit_frame.$('body').click();
-					
-					window.parent.bottom_edit_frame.$('#product_id').val(    $('#product_id option:selected').text()   );
+					window.parent.bottom_edit_frame.$('#product_id').val(    $('#product_id option:selected').val()   );
 					window.parent.bottom_edit_frame.$('#content_id').val(    $('#product_id option:selected').attr('content_id')   );
+
+					//window.parent.bottom_edit_frame.$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/calendar/' + window.parent.bottom_edit_frame.$('#content_id').val() );
+					//window.parent.bottom_edit_frame.$('#logo_img').click();
+					
+					window.parent.bottom_edit_frame.$('body').click();
+
 
 					window.parent.bottom_edit_frame.$('.wysiwyg_div_link')
 					.each(  function( i ){ 
@@ -77,7 +81,7 @@
 						$.post("<?php echo base_url(). 'index.php/page/get'; ?>",{
 							table: 'contents',
 							field: $(this).attr('id'),
-							product_id: $('#product_id option:selected').text()  
+							product_id: $('#product_id option:selected').val()  
 							},function(data) {
 								div_to_update.html(data);
 							});
@@ -86,16 +90,42 @@
 					
 					
 						$.post("<?php echo base_url(). 'index.php/page/does_product_image_exit'; ?>",{
-							product_id: $('#product_id option:selected').text()  
+							product_id: $('#product_id option:selected').val()  
 							},function(data) {
 									if( data == 'no_image'){
 										window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>images/no_image.png?random=<?php echo rand();    ?>')
 									}else{
-										window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>uploads/product_images/' +  $('#product_id option:selected').text() +  '/image.png?random=<?php echo rand();    ?>')
+										window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>uploads/product_images/' +  $('#product_id option:selected').val() +  '/image.png?random=<?php echo rand();    ?>')
 									};
 							});
 
 		    });
+		    
+		    
+				<?php   
+		
+				/**
+				 *  THIS IS THE HACK FOR CHROME BUG
+				 *
+				 */
+				if( $this->tools->browserIschrome()){?>
+					
+										setTimeout(function() { 											
+						
+											if( window.parent.bottom_edit_frame.$('#hack_to_fix_chrome_bug').val() == ''){
+												
+													window.parent.bottom_edit_frame.location.reload();
+												
+											};
+															 
+															 											
+										}, 500);
+							
+														
+				<?php
+				};
+					?>	
+				
 						
 				
 			});
@@ -149,7 +179,7 @@
 						
 						<?php  foreach($all_contents as $content){   ?>
 						
-								<option content_id=<?php echo $content->id;    ?>  value=1  <?php if( $product_id == $content->product_id)echo "selected";    ?> ><?php echo $content->product_id;    ?></option>
+								<option content_id=<?php echo $content->id;    ?>  product_id=<?php echo $content->product_id;    ?>  value=<?php echo $content->product_id;    ?>  <?php if( $product_id == $content->product_id)echo "selected";    ?> >product_id: <?php echo $content->product_id;    ?> booked for <?php echo $content->month . '/' . $content->day . '/' .$content->year;    ?></option>
 						
 						<?php  }  ?>
 						

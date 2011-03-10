@@ -65,9 +65,11 @@ function generate_calendar($year, $month, $days = array(), $day_name_length = 3,
 	#Begin calendar. Uses a real <caption>. See http://diveintomark.org/archives/2002/07/03
 	@list($p, $pl) = each($pn); 
 	@list($n, $nl) = each($pn); #previous and next links, if applicable
-	if($p) $p = '<span class="calendar-prev">'.($pl ? '<a href="'.htmlspecialchars($pl).'">'.$p.'</a>' : $p).'</span>&nbsp;';
-	if($n) $n = '&nbsp;<span class="calendar-next">'.($nl ? '<a href="'.htmlspecialchars($nl).'">'.$n.'</a>' : $n).'</span>';
+	if($p) $p = '<span class="calendar-prev">'.($pl ? $p : $p).'</span>&nbsp;';
+	if($n) $n = '&nbsp;<span class="calendar-next">'.($nl ? $n : $n).'</span>';
 	$calendar = '<table class="calendar">'."\n".
+	
+
 		'<caption class="calendar-month">'.$p.($month_href ? '<a href="'.htmlspecialchars($month_href).'">'.$title.'</a>' : "<span class='titleMonth'>".$title."</span>").$n."</caption>\n<tr>";
 
 

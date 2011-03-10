@@ -13,6 +13,8 @@
 						$('.menu_item').click(function(event) {
 							redirect_to($(this));
 						});			
+						
+						$('#hack_to_fix_chrome_bug').val(1);	
 											
 					});
 					
@@ -40,9 +42,13 @@ div#tabs li{
 }		
 
 </style>
-<input id="div_id_to_edit" type="hidden" value="">
-<input id="product_id" type="hidden" value="<?php  echo $contents[0]->product_id;   ?>">
-<input id="content_id" type="hidden" value="<?php  echo $contents[0]->id;   ?>">
+
+<div   style='display:none'  >
+chrome hack: <input id="hack_to_fix_chrome_bug" type="text" value=""><br>
+div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
+	p: <input id="product_id" type="text" value="<?php  echo $contents[0]->product_id;   ?>"><br>
+	c: <input id="content_id" type="text" value="<?php  echo $contents[0]->id;   ?>">	
+</div>
 
 <div  id='top_area' style='background:white'  >
 	

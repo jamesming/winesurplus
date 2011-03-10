@@ -31,7 +31,7 @@
 							//alert(calendar_td.attr('booked'));
 							
 							
-							if( calendar_td.attr('booked') == '1'){
+							if( calendar_td.attr('booked') == '1' && calendar_td.attr('id') != 'booked_for_this_product'){
 								
 								
 								alert('already booked');
@@ -42,12 +42,13 @@
 								
 											$.post("<?php echo base_url(). 'index.php/page/update_contents_with_date'; ?>",{
 												content_id: window.parent.$('#content_id').val(),
+												product_id: window.parent.$('#product_id').val(),
 												month:$(this).attr('month'),
 												day:$(this).attr('day'),
 												year:$(this).attr('year')
 												},function(data) {
 					
-														window.parent.window.parent.top_edit_frame.$('#error').html(  data  );
+														
 														
 																$(".calendar td").each(  function( i ){ 
 																			if( $(this).attr('booked') != '1'){
@@ -61,6 +62,8 @@
 														
 														calendar_td.css({background:'lightgreen'});
 														
+														window.parent.window.parent.top_edit_frame.$("#product_id").html('<option>' + data + '</option>')
+														// window.parent.window.parent.top_edit_frame.$('#error').html(  data  );
 														// window.parent.$('body').click();
 					
 												});								
@@ -69,14 +72,32 @@
 							
 
 							
-								
+
 
 							
 
 
 					   });
+					   
+					   
+
+					   
 					});
-	
+					
+					
+					function switch_month( when_month ){
+						if( when_month  == 'last'){
+							$('#goto_month').val( $('#last').val()  );
+						}else{
+							$('#goto_month').val( $('#next').val()  );
+						};
+						
+						//alert(when_month);
+						$('#form0').submit();
+						
+					}
+					
+	// alert('');
 </script>
 	
 </head>
@@ -85,26 +106,54 @@
 <?php
 
 
-$month = date("m");
+
+if( $goto_month !='' ){
+	$month = $goto_month;
+}else{
+	$month = date("m");
+};
+
+
 $year = date("Y");
+$last = $month - 1;
+$next = $month + 1;
+
+if( $next == 13){
+	 $month = 1;
+	 $year  = $year + 1;
+};
+
+if( $last == 0){
+	 $month = 12;
+	 $year  = $year - 1;
+};
 
 $time = time();
 
+?>
+<form   style='display:none'   id='form0'  name="form0" action="<?php echo base_url();   ?>index.php/page/calendar/<?php echo $content_id;    ?>" method="post"   >
+	last	<input id="last" name="last" type="text" value="<?php  echo $last  ?>"><br>
+	next	<input id="next" name="next" type="text" value="<?php  echo $next  ?>"><br>
+	year	<input id="year" name="year" type="text" value="<?php  echo $year  ?>"><br>
+	goto	<input id="goto_month" name="goto_month" type="text" value="<?php echo $goto_month;    ?>">
+</form>
 
+<?php     
 
 $today = date('j',$time);
-
 
 if( $month == date("m") ){
 	$days = array(
     $today=>array(NULL,NULL,'<span id=\'today\'>'.$today.'</span>'),
 	);
+}else{
+	$days = array();
 };
 
 $lastMonth = $month - 1;
 $nextMonth = $month + 1;
 
-$prev_or_next = array("<b onclick=alert('" . $lastMonth  . "')>&laquo;</b>"=>"?month=".$lastMonth."&deal_id=", "<b onclick=alert('" . $nextMonth  . "')>&raquo;</b>"=>"?month=".$nextMonth."&deal_id=");
+$prev_or_next = array("<b   style='cursor:pointer;font-size:40px'   onclick=switch_month('last')>&laquo;</b>"=>"?month=".$lastMonth."&deal_id=", "<b     style='cursor:pointer;font-size:40px'   onclick=switch_month('next')>&raquo;</b>"=>"?month=".$nextMonth."&deal_id=");
 
 
 

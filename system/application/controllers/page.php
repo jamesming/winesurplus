@@ -25,7 +25,6 @@
 class Page extends Controller {
 	
 	private $contents;
-	private $all_contents;
 	private $default_content;
 	private $product_id;
 
@@ -42,12 +41,7 @@ class Page extends Controller {
 		$this->contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
 		
 		
-		$select_what =  '*';
-		
-		$where_array = array();
-		
-		$this->all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
-		
+
 		
 		$select_what =  '*';
 		
@@ -111,7 +105,14 @@ class Page extends Controller {
 
 function edit_panel(){
 	
-	$data= array('all_contents' => $this->all_contents, 'product_id' => $this->product_id);
+	$select_what =  '*';
+	
+	$where_array = array();
+	
+	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
+		
+	
+	$data= array('all_contents' => $all_contents, 'product_id' => $this->product_id);
 		
 	
 	$this->load->view('header/edit_panel_view', $data);
@@ -482,11 +483,17 @@ function does_product_image_exit(){
  **/ 
 
 function calendar(){
-
+	
+		if( $this->input->post('goto_month') != ''){
+			$month = $this->input->post('goto_month');
+		}else{
+			$month = date("m");
+		};
+	
 
 		$select_what =  'month, day, year, product_id, id';
 		
-		$where_array = array('month' => '3');
+		$where_array = array('month' => $month);
 		
 		$contents_for_calendar = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
 		
@@ -497,14 +504,30 @@ function calendar(){
 			
 		}
 		
+		if( !isset($daysInMonthBooked) ){
+			$daysInMonthBooked = array();
+		};		
+		
 		
 		$select_what =  'day';
 		
-		$where_array = array( 'id' => $this->uri->segment(3) );
+		$where_array = array(
+		
+		 'id' => $this->uri->segment(3),
+		 'month' =>  $month
+		 
+		 );
 		
 		$booked_for_this_product = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
 		
-		$data= array('booked_for_this_product' => $booked_for_this_product[0]->day, 'daysInMonthBooked' =>  $daysInMonthBooked, 'product_id' => $this->input->post('product_id'));
+		if( count($booked_for_this_product) == 0 ){
+			$booked_day_during_month = '';
+		}else{
+			$booked_day_during_month = $booked_for_this_product[0]->day;
+		};
+		
+		
+		$data= array('goto_month' => $this->input->post('goto_month'), 'booked_for_this_product' => $booked_day_during_month, 'daysInMonthBooked' =>  $daysInMonthBooked, 'content_id' => $this->uri->segment(3));
 		
 		$this->load->view('page/calendar_view', $data);
 
@@ -525,6 +548,7 @@ function calendar(){
 function update_contents_with_date(){
 	
 	$content_id = $this->input->post('content_id');
+	$product_id = $this->input->post('product_id');
 	$month = $this->input->post('month');
 	$day = $this->input->post('day');
 	$year = $this->input->post('year');
@@ -536,9 +560,19 @@ function update_contents_with_date(){
 							'year'=> $year
 							);			
 					
-	echo $this->my_database_model->update_table( $table = 'contents', $primary_key = $content_id, $set_what_array );
+	$this->my_database_model->update_table( $table = 'contents', $primary_key = $content_id, $set_what_array );
 	
-
+	$select_what =  '*';
+	
+	$where_array = array();
+	
+	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
+		
+	// **  reinitializing drop down list in edit_panel	
+	// *
+	// *
+	foreach($all_contents as $content){   ?><option content_id=<?php echo $content->id;    ?>  product_id=<?php echo $content->product_id;    ?>  value=<?php echo $content->product_id;    ?>  <?php if( $product_id == $content->product_id)echo "selected";    ?> >product_id: <?php echo $content->product_id;    ?> booked for <?php echo $content->month . '/' . $content->day . '/' .$content->year;    ?></option><?php  } 
+		
 	
 }
 
