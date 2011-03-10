@@ -195,7 +195,7 @@ function update_table( $table, $primary_key, $set_what_array ){
  * @param array $where_array ({field} => {value})
  * @return array */
 
-function select_from_table( $table, $select_what, $where_array, $use_order = FALSE, $limit = -1){
+function select_from_table( $table, $select_what, $where_array, $use_order = FALSE, $order_field = '', $order_direction = 'asc', $limit = -1){
 	
 	$this->db->select($select_what);
 	
@@ -210,7 +210,7 @@ function select_from_table( $table, $select_what, $where_array, $use_order = FAL
 	
 	if( $use_order == TRUE){
 		
-		$this->db->order_by("order");
+		$this->db->order_by($order_field. ' '.$order_direction);
 		$this->db->order_by('created desc');
 		
 	}else{

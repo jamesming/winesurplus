@@ -10,11 +10,13 @@
 	
 			$(document).ready(function() {
 				
-				
 				$('#publish').click(function(event) {
 					window.open('<?php echo  base_url();   ?>index.php/page/index/','mywindow');
 				});		
 				
+				$('#calendar').click(function(event) {
+					window.parent.bottom_edit_frame.$('#logo_img').click()
+				});						
 				
 				$('#clickme').click(function(event) {
 					
@@ -48,10 +50,6 @@
 					  	$('#switch').val('1');
 					  	
 							window.parent.bottom_edit_frame.$('.profile_image_link').css({cursor:'default'}).unbind();	
-							
-
-								
-							
 					  	
 					  };
 					
@@ -66,7 +64,10 @@
 				
 				$('#product_id').change(function() {
 					
+					window.parent.bottom_edit_frame.$('body').click();
+					
 					window.parent.bottom_edit_frame.$('#product_id').val(    $('#product_id option:selected').text()   );
+					window.parent.bottom_edit_frame.$('#content_id').val(    $('#product_id option:selected').attr('content_id')   );
 
 					window.parent.bottom_edit_frame.$('.wysiwyg_div_link')
 					.each(  function( i ){ 
@@ -84,8 +85,15 @@
 					});
 					
 					
-					window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>uploads/product_images/' +  $('#product_id option:selected').text() +  '/image.png?random=<?php echo rand();    ?>')
-					
+						$.post("<?php echo base_url(). 'index.php/page/does_product_image_exit'; ?>",{
+							product_id: $('#product_id option:selected').text()  
+							},function(data) {
+									if( data == 'no_image'){
+										window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>images/no_image.png?random=<?php echo rand();    ?>')
+									}else{
+										window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>uploads/product_images/' +  $('#product_id option:selected').text() +  '/image.png?random=<?php echo rand();    ?>')
+									};
+							});
 
 		    });
 						
@@ -118,28 +126,32 @@
 	<div  class='container '    >
 		<table   style='height:60px;border:0px solid gray'  >
 			<tr>
-				<td style='vertical-align:middle'>
+				<td width=80% style='vertical-align:middle'>
 					
 					
 							<div id='clickme'  class='div_buttons rounded_border'     >edit mode</div>
+							
+							<div id='calendar'  class='div_buttons rounded_border'   style='background:purple;border:1px solid blue'  >book deal</div>
 							
 							<div id='publish'  class='div_buttons rounded_border'    style='background:green;border:1px solid blue'>publish</div>  
 					
 							
 							<div id='logout'   class='div_buttons rounded_border'   style='background:pink'   >logout</div>
 					
-							<div id='error'  class='div_buttons rounded_border'    style='background:lightgray;border:1px solid gray'>error log</div>  
+							<div id='error'  class='div_buttons'    style='height:50px;background:lightgray;border:1px solid gray'>error log</div>  
 												
 					
 				</td>
 				<td>
+							
+	
 					<select id='product_id' name='product_id'>
 						
-					<option value=1>1</option>
-					<option value=1>2</option>
-					<option value=1>3</option>
-					<option value=1>4</option>
-					<option value=1>5</option>
+						<?php  foreach($all_contents as $content){   ?>
+						
+								<option content_id=<?php echo $content->id;    ?>  value=1  <?php if( $product_id == $content->product_id)echo "selected";    ?> ><?php echo $content->product_id;    ?></option>
+						
+						<?php  }  ?>
 						
 					</select>
 				</td>
@@ -152,3 +164,5 @@
 	</div>
 
 <input id="switch" type="hidden" value="1">
+
+

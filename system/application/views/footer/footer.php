@@ -26,4 +26,3 @@
 	$this->load->view('header/wysiwyg_jquery_with_iframe.php');   
 	?>	
 	
-	<?php  $this->load->view('header/fancy_zoom.php');   ?>

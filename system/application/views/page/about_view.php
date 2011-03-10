@@ -5,8 +5,7 @@
 	<?php  $this->load->view('header/header_css.php');   ?>
 	
 	<script type="text/javascript" language="Javascript" src = "<?php echo  base_url();   ?>js/jquery.js"></script>
-	
-
+	<?php  $this->load->view('header/fancy_zoom.php');   ?>
 
 	<script type="text/javascript" language="Javascript">
 		
@@ -53,7 +52,7 @@
 	
 <div class=' container' >
 	
-		<div   id='name'   href='#wysiwyg_div'class="wysiwyg_div_link" >
+		<div   id='name'   href='#wysiwyg_div' class="wysiwyg_div_link" >
 			<?php     
 			
 			if( isset( $contents[0]->name  ) ){
@@ -89,7 +88,7 @@
 
 <div class=' container' >
 	
-		<div   id='discount_price'   href='#wysiwyg_div'class="wysiwyg_div_link" >
+		<div   id='discount_price'   href='#wysiwyg_div' class="wysiwyg_div_link" >
 			<?php     
 			
 			if( isset( $contents[0]->discount_price ) ){
@@ -106,7 +105,7 @@
 
 <div class=' container' >
 	
-		<div   id='reviews'   href='#wysiwyg_div'class="wysiwyg_div_link" >
+		<div   id='reviews'   href='#wysiwyg_div' class="wysiwyg_div_link" >
 			<?php     
 			
 			if( isset( $contents[0]->reviews  ) ){
@@ -149,15 +148,11 @@
 			
 					<img id='product_img'   style='margin-top:-29px'  src='<?php 
 					
-//					if(   is_file('uploads/user_profile_image/' . $this->session->userdata['user_id'] . '/image.png')   ){
-//			
-//							echo base_url(). 'uploads/user_profile_image/' . $this->session->userdata['user_id']. '/image.png';
-//			
-//			  	}else{
-			  	
-			  			echo base_url(). 'images/male_default_large.png';
-			  			
-//			  	}
+			  		  if( !is_file('uploads/product_images/' . $contents[0]->product_id . '/image.png' ) ){
+        				echo base_url() . "images/no_image.png?random=" . rand();
+    					}else{
+			  				echo base_url(). "uploads/product_images/" . $contents[0]->product_id . "/image.png";
+			  			}
 					
 					?>'>			
 			
@@ -174,7 +169,7 @@
 	
 	
 	<div  class='span-19 last'   >
-		<div   id='description'   href='#wysiwyg_div'class="wysiwyg_div_link" >
+		<div   id='description'   href='#wysiwyg_div' class="wysiwyg_div_link" >
 			<?php     
 			
 			if( isset( $contents[0]->description  ) ){

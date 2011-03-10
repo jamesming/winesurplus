@@ -1,7 +1,14 @@
-<?php  $this->load->view('header/chrome_hack_for_memory_issues.php');   ?>
 
 <script type="text/javascript" language="Javascript">
+	
+	
 					$(document).ready(function() { 
+						
+						if(  window.parent.document.getElementById('top_edit_frame')  ){  
+								$('#logo_img').addClass('cursor_pointer').fancyZoom().click(function(event) {
+										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/calendar/' + $('#content_id').val() );
+								});		
+						};
 						
 						$('.menu_item').click(function(event) {
 							redirect_to($(this));
@@ -33,19 +40,14 @@ div#tabs li{
 }		
 
 </style>
-
+<input id="div_id_to_edit" type="hidden" value="">
+<input id="product_id" type="hidden" value="<?php  echo $contents[0]->product_id;   ?>">
+<input id="content_id" type="hidden" value="<?php  echo $contents[0]->id;   ?>">
 
 <div  id='top_area' style='background:white'  >
 	
-		<div id='name_profession' class='container '    >
-			
-			
-logo
-			
-
-			
-
-
+		<div id='logo_img'   href='#wysiwyg_div'  class='container'     style='font-size:23px'   >
+LOGO
 		</div>
 		
 		<div id='tabs' class='container '   >

@@ -25,17 +25,28 @@
 class Page extends Controller {
 	
 	private $contents;
+	private $all_contents;
 	private $default_content;
+	private $product_id;
 
 	function Page(){
 		parent::Controller();	
+		
+		$this->product_id = 1;
 
 		
 		$select_what =  '*';
 		
-		$where_array = array('product_id' => 1);
+		$where_array = array('product_id' => $this->product_id);
 	
 		$this->contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
+		
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$this->all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
 		
 		
 		$select_what =  '*';
@@ -61,8 +72,7 @@ class Page extends Controller {
 	function index(){
 		
 
-		$data = array('default_content' => $this->default_content, 'contents' => $this->contents);
-
+		$data = array( 'default_content' => $this->default_content, 'contents' => $this->contents);
 		$this->load->view('page/about_view', $data);
 	
 	}	
@@ -101,7 +111,10 @@ class Page extends Controller {
 
 function edit_panel(){
 	
-	$this->load->view('header/edit_panel_view');
+	$data= array('all_contents' => $this->all_contents, 'product_id' => $this->product_id);
+		
+	
+	$this->load->view('header/edit_panel_view', $data);
 	
 	
 }
@@ -439,11 +452,95 @@ function upload_image(){
 
 }  
 
+/**
+ * get_product_image
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @path /index.php/dashboard/get_product_image
+ * @access public
+ **/ 
+
+function does_product_image_exit(){
+	
+	  if( !is_file($directory_path  =  'uploads/product_images/' . $this->input->post('product_id') . '/image.png' ) ){
+        echo  'no_image';
+    }
+	
+}
 
 
+/**
+ * calendar
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @path /index.php/dashboard/calendar
+ * @access public
+ **/ 
+
+function calendar(){
 
 
+		$select_what =  'month, day, year, product_id, id';
+		
+		$where_array = array('month' => '3');
+		
+		$contents_for_calendar = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
+		
+	
+		foreach($contents_for_calendar as $content_for_one_day){
+			
+			$daysInMonthBooked[$content_for_one_day->day] = $content_for_one_day->product_id;
+			
+		}
+		
+		
+		$select_what =  'day';
+		
+		$where_array = array( 'id' => $this->uri->segment(3) );
+		
+		$booked_for_this_product = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
+		
+		$data= array('booked_for_this_product' => $booked_for_this_product[0]->day, 'daysInMonthBooked' =>  $daysInMonthBooked, 'product_id' => $this->input->post('product_id'));
+		
+		$this->load->view('page/calendar_view', $data);
 
+
+}
+
+
+/**
+ * update_deal_with_date
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @path /index.php/dashboard/update_deal_with_date
+ * @access public
+ **/ 
+
+function update_contents_with_date(){
+	
+	$content_id = $this->input->post('content_id');
+	$month = $this->input->post('month');
+	$day = $this->input->post('day');
+	$year = $this->input->post('year');
+	$table ;
+	
+	$set_what_array = array(
+							'month'=> $month,
+							'day'=> $day,
+							'year'=> $year
+							);			
+					
+	echo $this->my_database_model->update_table( $table = 'contents', $primary_key = $content_id, $set_what_array );
+	
+
+	
+}
 
 }
 
