@@ -489,11 +489,19 @@ function calendar(){
 		}else{
 			$month = date("m");
 		};
-	
+		
+		if( $this->input->post('year') != ''){
+			$year = $this->input->post('year');
+		}else{
+			$year = date("Y");
+		};	
 
 		$select_what =  'month, day, year, product_id, id';
 		
-		$where_array = array('month' => $month);
+		$where_array = array(
+		'month' => $month,
+		'year' =>  $year
+		);
 		
 		$contents_for_calendar = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
 		
@@ -514,8 +522,8 @@ function calendar(){
 		$where_array = array(
 		
 		 'id' => $this->uri->segment(3),
-		 'month' =>  $month
-		 
+		 'month' =>  $month,
+		 'year' =>  $year
 		 );
 		
 		$booked_for_this_product = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
@@ -527,7 +535,7 @@ function calendar(){
 		};
 		
 		
-		$data= array('goto_month' => $this->input->post('goto_month'), 'booked_for_this_product' => $booked_day_during_month, 'daysInMonthBooked' =>  $daysInMonthBooked, 'content_id' => $this->uri->segment(3));
+		$data= array('year' => $this->input->post('year'),'month' => $this->input->post('month'),'day' => $this->input->post('day'),'goto_month' => $this->input->post('goto_month'), 'booked_for_this_product' => $booked_day_during_month, 'daysInMonthBooked' =>  $daysInMonthBooked, 'content_id' => $this->uri->segment(3));
 		
 		$this->load->view('page/calendar_view', $data);
 

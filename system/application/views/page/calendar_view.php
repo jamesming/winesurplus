@@ -114,16 +114,24 @@ if( $goto_month !='' ){
 };
 
 
-$year = date("Y");
+if( $year == ''){
+	$year = date("Y");
+};
+
+
+
+
 $last = $month - 1;
 $next = $month + 1;
 
-if( $next == 13){
+if( $next == 14){
+	 $next = 2;
 	 $month = 1;
 	 $year  = $year + 1;
 };
 
-if( $last == 0){
+if( $last == -1){
+	 $last = 11;
 	 $month = 12;
 	 $year  = $year - 1;
 };
@@ -157,7 +165,7 @@ $prev_or_next = array("<b   style='cursor:pointer;font-size:40px'   onclick=swit
 
 
 
-echo $this->calendar->generate_calendar(date('Y', $time), $month, $days, $day_of_the_week_is_shown=4, NULL, 0, $prev_or_next, $daysInMonthBooked,  $booked_for_this_product);
+echo $this->calendar->generate_calendar($year , $month, $days, $day_of_the_week_is_shown=4, NULL, 0, $prev_or_next, $daysInMonthBooked,  $booked_for_this_product);
 ?>	
 	
 </body>
