@@ -195,7 +195,7 @@ function update_table( $table, $primary_key, $set_what_array ){
  * @param array $where_array ({field} => {value})
  * @return array */
 
-function select_from_table( $table, $select_what, $where_array, $use_order = FALSE, $order_field = '', $order_direction = 'asc', $limit = -1){
+function select_from_table( $table, $select_what, $where_array, $use_order = FALSE, $order_field = '', $order_direction = 'asc', $limit = -1, $use_join = FALSE, $join_array = array()){
 	
 	$this->db->select($select_what);
 	
@@ -211,7 +211,14 @@ function select_from_table( $table, $select_what, $where_array, $use_order = FAL
 	if( $use_order == TRUE){
 		
 		$this->db->order_by($order_field. ' '.$order_direction);
-		$this->db->order_by('created desc');
+		
+		
+		if( $use_join == FALSE){
+			
+				$this->db->order_by('created desc');
+			
+		};
+		
 		
 	}else{
 		
@@ -224,6 +231,24 @@ function select_from_table( $table, $select_what, $where_array, $use_order = FAL
 	}else{
 		$this->db->limit($limit);
 	};
+	
+	if( $use_join == TRUE){
+		
+
+			if( count($join_array) > 0 ){
+				
+				
+		
+				foreach( $join_array as $field => $value ){
+					$this->db->join($field, $value);
+				}		
+				
+			};
+			
+	};
+	
+	
+	
 	
 	
 	

@@ -105,12 +105,18 @@ class Page extends Controller {
 
 function edit_panel(){
 	
-	$select_what =  '*';
+	$select_what =  'products.name,contents.id, contents.product_id, contents.year, contents.month, contents.day';
 	
 	$where_array = array();
 	
-	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
+	$join_array = array(
+								'products' => 'products.id = contents.product_id'
+								);
+								
+	
+	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 		
+	//echo '<pre>';print_r(  $all_contents   );echo '</pre>';  exit;
 	
 	$data= array('all_contents' => $all_contents, 'product_id' => $this->product_id);
 		
@@ -637,7 +643,7 @@ function update_contents_with_date(){
  **/ 
  
  
- function add_or_update_product(){
+  function add_or_update_product(){
 	
 		$fields_array = array(
 		                        'id' => array(

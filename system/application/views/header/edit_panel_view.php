@@ -192,7 +192,7 @@
 						
 						<?php  foreach($all_contents as $content){   ?>
 						
-								<option content_id=<?php echo $content->id;    ?>  product_id=<?php echo $content->product_id;    ?>  value=<?php echo $content->product_id;    ?>  <?php if( $product_id == $content->product_id)echo "selected";    ?> >product_id: <?php echo $content->product_id;    ?> booked for <?php echo $content->month . '/' . $content->day . '/' .$content->year;    ?></option>
+								<option content_id=<?php echo $content->id;    ?>  product_id=<?php echo $content->product_id;    ?>  value=<?php echo $content->product_id;    ?>  <?php if( $product_id == $content->product_id)echo "selected";    ?> ><?php echo $content->name;    ?> booked for <?php echo $content->month . '/' . $content->day . '/' .$content->year;    ?></option>
 						
 						<?php  }  ?>
 						
