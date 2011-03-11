@@ -105,7 +105,7 @@ class Page extends Controller {
 
 function edit_panel(){
 	
-	$select_what =  'products.name,contents.id, contents.product_id, contents.year, contents.month, contents.day';
+	$select_what =  'products.name, contents.id, contents.product_id, contents.year, contents.month, contents.day';
 	
 	$where_array = array();
 	
@@ -116,7 +116,6 @@ function edit_panel(){
 	
 	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 		
-	//echo '<pre>';print_r(  $all_contents   );echo '</pre>';  exit;
 	
 	$data= array('all_contents' => $all_contents, 'product_id' => $this->product_id);
 		
@@ -576,18 +575,23 @@ function update_contents_with_date(){
 					
 	$this->my_database_model->update_table( $table = 'contents', $primary_key = $content_id, $set_what_array );
 	
-	$select_what =  '*';
+	$select_what =  'products.name,contents.id, contents.product_id, contents.year, contents.month, contents.day';
 	
 	$where_array = array();
 	
-	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
+	$join_array = array(
+								'products' => 'products.id = contents.product_id'
+								);
+								
+	
+	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 		
 	// **  reinitializing drop down list in edit_panel	
 	// *
 	// *
-	foreach($all_contents as $content){   ?><option content_id=<?php echo $content->id;    ?>  product_id=<?php echo $content->product_id;    ?>  value=<?php echo $content->product_id;    ?>  <?php if( $product_id == $content->product_id)echo "selected";    ?> >product_id: <?php echo $content->product_id;    ?> booked for <?php echo $content->month . '/' . $content->day . '/' .$content->year;    ?></option><?php  } 
+	foreach($all_contents as $content){   ?><option content_id=<?php echo $content->id;    ?>  product_id=<?php echo $content->product_id;    ?>  value=<?php echo $content->product_id;    ?>  <?php if( $product_id == $content->product_id)echo "selected";    ?> ><?php echo $content->name;    ?> booked for <?php echo $content->month . '/' . $content->day . '/' .$content->year;    ?></option><?php  } 
 		
-	
+
 }
 
 
