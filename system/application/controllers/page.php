@@ -33,7 +33,20 @@ class Page extends Controller {
 		
 		$this->product_id = 1;
 
-		
+	}
+	
+
+	/**
+	 * index
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/index
+	 * @access public
+	 **/ 
+	
+	function index(){
 		$select_what =  '*';
 		
 		$where_array = array('product_id' => $this->product_id);
@@ -49,22 +62,6 @@ class Page extends Controller {
 		
 		$this->default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
 
-
-	}
-	
-
-	/**
-	 * index
-	 *
-	 * {@source }
-	 * @package BackEnd
-	 * @author James Ming <jamesming@gmail.com>
-	 * @path /index.php/page/index
-	 * @access public
-	 **/ 
-	
-	function index(){
-		
 
 		$data = array( 'default_content' => $this->default_content, 'contents' => $this->contents);
 		$this->load->view('page/about_view', $data);
@@ -105,6 +102,8 @@ class Page extends Controller {
 
 function edit_panel(){
 	
+	$product_id = $this->product_id;
+	
 	$select_what =  'products.name, contents.id, contents.product_id, contents.year, contents.month, contents.day';
 	
 	$where_array = array();
@@ -115,11 +114,11 @@ function edit_panel(){
 								
 	
 	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
-		
+
+	$option_tags = $this->custom->generate_option_tags( $all_contents, $selected_product_id = $product_id );
 	
-	$data= array('all_contents' => $all_contents, 'product_id' => $this->product_id);
+	$data= array('all_contents' => $all_contents, 'product_id' => $this->product_id, 'option_tags' => $option_tags);
 		
-	
 	$this->load->view('header/edit_panel_view', $data);
 	
 	
@@ -574,6 +573,8 @@ function update_contents_with_date(){
 							);			
 					
 	$this->my_database_model->update_table( $table = 'contents', $primary_key = $content_id, $set_what_array );
+
+
 	
 	$select_what =  'products.name,contents.id, contents.product_id, contents.year, contents.month, contents.day';
 	
@@ -586,10 +587,7 @@ function update_contents_with_date(){
 	
 	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 		
-	// **  reinitializing drop down list in edit_panel	
-	// *
-	// *
-	foreach($all_contents as $content){   ?><option content_id=<?php echo $content->id;    ?>  product_id=<?php echo $content->product_id;    ?>  value=<?php echo $content->product_id;    ?>  <?php if( $product_id == $content->product_id)echo "selected";    ?> ><?php echo $content->name;    ?> booked for <?php echo $content->month . '/' . $content->day . '/' .$content->year;    ?></option><?php  } 
+	echo  $this->custom->generate_option_tags( $all_contents, $selected_product_id = $product_id );
 		
 
 }
@@ -648,6 +646,10 @@ function update_contents_with_date(){
  
  
   function add_or_update_product(){
+  	
+  	$product_id = $this->input->post('product_id');
+
+
 	
 		$fields_array = array(
 		                        'id' => array(
@@ -700,10 +702,9 @@ function update_contents_with_date(){
 									'discount' => $this->input->post('discount')
 											);			
 								
-					echo  $this->my_database_model->update_table( $table, $primary_key = $this->input->post('product_id'), $set_what_array );
-	
-	
-	     
+					$this->my_database_model->update_table( $table, $primary_key = $product_id, $set_what_array );
+
+
 	  }else{
 		
 					$insert_what = array(
@@ -712,16 +713,49 @@ function update_contents_with_date(){
 								'discount' => $this->input->post('discount')
 								);	
 					
-					echo  $this->my_database_model->insert_table(
+					$product_id = $this->my_database_model->insert_table(
 													$table = 'products', 
 													$insert_what
 													); 
+													
+					$insert_what = array(
+								'product_id' => $product_id
+								);	
+					
+					$this->my_database_model->insert_table(
+													$table = 'contents', 
+													$insert_what
+													); 													
+													
+													
 		}
+		
+
+
+	$select_what =  'products.name,contents.id, contents.product_id, contents.year, contents.month, contents.day';
+	
+	$where_array = array();
+	
+	$join_array = array(
+								'products' => 'products.id = contents.product_id'
+								);
+								
+	
+	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
+		
+		
+		
+	echo $this->custom->generate_option_tags( $all_contents, $selected_product_id = $product_id );
+
+
+
+		
 	
 	}
+	
+	
 
-
-}
+} // END CLASS
 
 
 
