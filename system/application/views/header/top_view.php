@@ -49,7 +49,7 @@ div#tabs li{
 
 </style>
 
-<div   style='display:block'  >
+<div   style='display:none'  >
 chrome hack: <input id="hack_to_fix_chrome_bug" type="text" value=""><br>
 div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 	p: <input id="product_id" type="text" value="<?php  echo $contents[0]->product_id;   ?>"><br>

@@ -39,6 +39,12 @@
 									// window.parent.window.parent.top_edit_frame.$('#error').html(  data  );
 									window.parent.$('#product_id').val(  window.parent.window.parent.top_edit_frame.$('#product_id option:selected').val()  ); 
 									window.parent.$('#content_id').val( window.parent.window.parent.top_edit_frame.$('#product_id option:selected').attr('content_id')   );
+									
+									
+					  			window.parent.$('.wysiwyg_div_link').html('add contents')
+									
+									
+									
 									window.parent.$('body').click(); 
 							});		
 							
