@@ -121,7 +121,7 @@ function edit_panel(){
 								);
 								
 	
-	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
+	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 
 
 
@@ -520,7 +520,7 @@ function calendar(){
 		'year' =>  $year
 		);
 		
-		$contents_for_calendar = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc' );
+		$contents_for_calendar = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'asc' );
 		
 	
 		foreach($contents_for_calendar as $content_for_one_day){
@@ -598,7 +598,7 @@ function update_contents_with_date(){
 								);
 								
 	
-	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
+	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 		
 	echo  $this->custom->generate_option_tags( $all_contents, $selected_content_id = $content_id );
 		
@@ -737,7 +737,7 @@ function update_contents_with_date(){
 								'product_id' => $product_id
 								);	
 					
-					$this->my_database_model->insert_table(
+					$content_id = $this->my_database_model->insert_table(
 													$table = 'contents', 
 													$insert_what
 													); 													
@@ -756,7 +756,7 @@ function update_contents_with_date(){
 								);
 								
 	
-	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
+	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 		
 		
 		

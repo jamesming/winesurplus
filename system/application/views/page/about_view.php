@@ -42,7 +42,7 @@
 								$.post("<?php echo base_url(). 'index.php/page/get'; ?>",{
 									table: 'contents',
 									field: div_to_update.attr('id'),
-									content_id:   $('#content_id').val()
+									content_id:   window.parent.top_edit_frame.$('#product_id option:selected').attr('content_id')  
 									},function(data) {
 										
 										div_to_update.html(data);
