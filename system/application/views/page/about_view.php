@@ -53,6 +53,19 @@
 								
 								
 							});
+							
+								
+							$.post("<?php echo base_url(). 'index.php/page/does_product_image_exit'; ?>",{
+								product_id: $('#product_id option:selected').val()  
+								},function(data) {
+										if( data == 'no_image'){
+											window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>images/no_image.png?random=<?php echo rand();    ?>')
+										}else{
+											window.parent.bottom_edit_frame.$('#product_img').attr('src','<?php echo base_url();    ?>uploads/product_images/' +  $('#product_id option:selected').val() +  '/image.png?random=<?php echo rand();    ?>')
+										};
+								});
+								
+							
 					}
 	
 	</script>
