@@ -32,6 +32,7 @@
 							$.post("<?php echo base_url() . 'index.php/page/add_or_update_product/';  ?>",{
 								name: $('#name').val(),
 								product_id: $('#product_id').val(),
+								content_id: $('#content_id').val(),
 								price: $('#price').val(),
 								discount: $('#discount').val()
 							},function(data) {
@@ -39,15 +40,11 @@
 									// window.parent.window.parent.top_edit_frame.$('#error').html(  data  );
 									window.parent.$('#product_id').val(  window.parent.window.parent.top_edit_frame.$('#product_id option:selected').val()  ); 
 									window.parent.$('#content_id').val( window.parent.window.parent.top_edit_frame.$('#product_id option:selected').attr('content_id')   );
-									
-									
-					  			window.parent.$('.wysiwyg_div_link').html('add contents')
-									
-									
-									
+									window.parent.wysiwyg();
 									window.parent.$('body').click(); 
 							});		
 							
+
 							
 
 						});			
@@ -64,6 +61,7 @@
 <form name='form0'>
 
 <input name="product_id" id="product_id" type="hidden" value="<?php echo $product_id;    ?>">
+<input name="content_id" id="content_id" type="hidden" value="<?php echo $product_id;    ?>">
 
 <table class='form_table_edit_product_info'    >
 	<tr>

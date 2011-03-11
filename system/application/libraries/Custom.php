@@ -26,10 +26,10 @@ class Custom {
 	
 	}
 
-	function generate_option_tags( $all_contents, $selected_product_id ){
+	function generate_option_tags( $all_contents, $selected_content_id ){
 			$option_tags ='';
 			foreach($all_contents as $content){
-				$option_tags .= "<option content_id=".$content->id."  product_id=".$content->product_id."  value=".$content->product_id .( $selected_product_id == $content->product_id ? " selected " : "" ) .">". $content->name." booked for ".$content->month . "/" . $content->day . "/" .$content->year."</option>";
+				$option_tags .= "<option content_id=".$content->id."  product_id=".$content->product_id."  value=".$content->product_id .( $selected_content_id == $content->id ? " selected " : "" ) .">". $content->name." booked for ".$content->month . "/" . $content->day . "/" .$content->year."</option>";
 			} 
 			return $option_tags;
 	}

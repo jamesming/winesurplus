@@ -24,14 +24,24 @@
  */
 class Page extends Controller {
 	
-	private $contents;
-	private $default_content;
-	private $product_id;
+	private $content_id;
 
 	function Page(){
 		parent::Controller();	
 		
-		$this->product_id = 1;
+		
+
+		$select_what =  'id, day_of_year';
+		
+		$where_array = array(
+		'day_of_year' . ' <= ' =>  date('z',time())
+		);
+	
+		$contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'desc', $limit = 1);
+		
+		$this->content_id = $contents[0]->id;
+
+		
 
 	}
 	
@@ -49,21 +59,19 @@ class Page extends Controller {
 	function index(){
 		$select_what =  '*';
 		
-		$where_array = array('product_id' => $this->product_id);
+		$where_array = array('id' => $this->content_id);
 	
-		$this->contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
-		
+		$contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
 		
 
-		
 		$select_what =  '*';
 		
 		$where_array = array();
 		
-		$this->default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
+		$default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
 
 
-		$data = array( 'default_content' => $this->default_content, 'contents' => $this->contents);
+		$data = array( 'default_content' => $default_content, 'contents' => $contents);
 		$this->load->view('page/about_view', $data);
 	
 	}	
@@ -102,7 +110,7 @@ class Page extends Controller {
 
 function edit_panel(){
 	
-	$product_id = $this->product_id;
+	$content_id = $this->content_id;
 	
 	$select_what =  'products.name, contents.id, contents.product_id, contents.year, contents.month, contents.day';
 	
@@ -115,9 +123,14 @@ function edit_panel(){
 	
 	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 
-	$option_tags = $this->custom->generate_option_tags( $all_contents, $selected_product_id = $product_id );
+
+
+
+
+
+	$option_tags = $this->custom->generate_option_tags( $all_contents, $selected_content_id = $content_id );
 	
-	$data= array('all_contents' => $all_contents, 'product_id' => $this->product_id, 'option_tags' => $option_tags);
+	$data= array('all_contents' => $all_contents,  'option_tags' => $option_tags);
 		
 	$this->load->view('header/edit_panel_view', $data);
 	
@@ -245,7 +258,7 @@ function update(){
 	 
 
 	 
-	 
+	 exit;
 	 
 	 // ******** DEFAULT contents
 	 
@@ -334,7 +347,7 @@ function update(){
 
 function get(){
 	
-	$product_id = $this->input->post('product_id');
+	$content_id = $this->input->post('content_id');
 	$table = 'contents';
 	$field = $this->input->post('field');
 
@@ -343,7 +356,7 @@ function get(){
 	
 		$select_what =  $field;
 		
-		$where_array = array('product_id' => $product_id );
+		$where_array = array('id' => $content_id );
 	
 		$files = $this->my_database_model->select_from_table( 
 		$table, $select_what, $where_array );
@@ -566,16 +579,16 @@ function update_contents_with_date(){
 	$year = $this->input->post('year');
 	$table ;
 	
+
 	$set_what_array = array(
 							'month'=> $month,
 							'day'=> $day,
-							'year'=> $year
+							'year'=> $year,
+							'day_of_year'=> date('z',strtotime($year.'-'.$month.'-'.$day))
 							);			
 					
 	$this->my_database_model->update_table( $table = 'contents', $primary_key = $content_id, $set_what_array );
 
-
-	
 	$select_what =  'products.name,contents.id, contents.product_id, contents.year, contents.month, contents.day';
 	
 	$where_array = array();
@@ -587,7 +600,7 @@ function update_contents_with_date(){
 	
 	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'product_id', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
 		
-	echo  $this->custom->generate_option_tags( $all_contents, $selected_product_id = $product_id );
+	echo  $this->custom->generate_option_tags( $all_contents, $selected_content_id = $content_id );
 		
 
 }
@@ -606,6 +619,7 @@ function update_contents_with_date(){
 	function iframe_form_to_add_or_edit_product(){
 	
 		$product_id = $this->uri->segment(3);
+		$content_id = $this->uri->segment(4);
 		
 		if( $product_id > 0){
 			
@@ -627,7 +641,7 @@ function update_contents_with_date(){
 			
 		};
 	
-		$data= array('product_id' => $product_id, 'name' => $name, 'price' => $price, 'discount' => $discount);
+		$data= array('content_id' => $content_id, 'product_id' => $product_id, 'name' => $name, 'price' => $price, 'discount' => $discount);
 		
 		$this->load->view('iframe/iframe_form_to_add_or_edit_product_view', $data);
 	}
@@ -648,6 +662,7 @@ function update_contents_with_date(){
   function add_or_update_product(){
   	
   	$product_id = $this->input->post('product_id');
+  	$content_id = $this->input->post('content_id');
 
 
 	
@@ -745,7 +760,7 @@ function update_contents_with_date(){
 		
 		
 		
-	echo $this->custom->generate_option_tags( $all_contents, $selected_product_id = $product_id );
+	echo $this->custom->generate_option_tags( $all_contents, $selected_content_id = $content_id );
 
 
 

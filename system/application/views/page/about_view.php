@@ -32,7 +32,28 @@
 					});  // END $(document).ready(function()
 
 
+					function wysiwyg(){
+							
+			  			$('.wysiwyg_div_link')
+							.each(  function( i ){ 
+								
+								var div_to_update = $(this);
+								
+								$.post("<?php echo base_url(). 'index.php/page/get'; ?>",{
+									table: 'contents',
+									field: div_to_update.attr('id'),
+									content_id:   $('#content_id').val()
+									},function(data) {
+										
+										div_to_update.html(data);
 
+									});
+								
+								
+								
+								
+							});
+					}
 	
 	</script>
 	

@@ -12,7 +12,7 @@
 										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' );
 								});			
 								$('#edit_product').fancyZoom().click(function(event) {
-										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' + $('#product_id').val() );
+										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' + $('#product_id').val() + '/' +  $('#content_id').val());
 								});									
 						};
 						
@@ -49,7 +49,7 @@ div#tabs li{
 
 </style>
 
-<div   style='display:none'  >
+<div   style='display:block'  >
 chrome hack: <input id="hack_to_fix_chrome_bug" type="text" value=""><br>
 div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 	p: <input id="product_id" type="text" value="<?php  echo $contents[0]->product_id;   ?>"><br>

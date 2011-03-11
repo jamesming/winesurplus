@@ -5,11 +5,6 @@
 						
 						if(  window.parent.document.getElementById('top_edit_frame')  &&  window.parent.top_edit_frame.$('#switch').val() == 0){  // EDIT MODE
 					  	
-					  	$('.wysiwyg_div_link').css({cursor:'pointer', background:'lightyellow'}).fancyZoom().click(function(event) {
-					  		window.parent.bottom_edit_frame.$("#embed_video").css({visibility:'hidden'});
-								$("#div_id_to_edit").val($(this).attr('id'));
-								$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/wysiwyg');
-							});
 					  	
 						};
 						

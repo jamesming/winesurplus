@@ -91,7 +91,7 @@
 						$.post("<?php echo base_url(). 'index.php/page/get'; ?>",{
 							table: 'contents',
 							field: $(this).attr('id'),
-							product_id: $('#product_id option:selected').val()  
+							content_id: $('#product_id option:selected').attr('content_id')  
 							},function(data) {
 								div_to_update.html(data);
 							});
