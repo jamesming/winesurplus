@@ -165,7 +165,10 @@
 </head>
 
 <style>
-
+table#panel td{
+vertical-align:middle;
+text-align:center;
+}
 .div_buttons{
 	cursor:pointer; 
 	background:orange;
@@ -190,9 +193,9 @@
 
 <body>
 	<div  class='container '    >
-		<table   style='height:60px;border:0px solid gray'  >
+		<table  id='panel' style='height:60px;border:0px solid gray'  >
 			<tr>
-				<td width=50% style='vertical-align:middle'>
+				<td width=44% style='vertical-align:middle'>
 					
 					
 							<div id='clickme'  class='div_buttons rounded_border'     >edit mode</div>
@@ -209,25 +212,22 @@
 							<div id='edit_product'  class='div_buttons rounded_border'   style='background:lightgreen;'  >edit deal</div>
 												
 				</td>
-				<td>
+				<td  width=24%  >
 
-							<select id='product_id' name='product_id' >
-								
-								<?php  echo $option_tags;   ?>
-								
-							</select><br>						
-<!--						
-						<span dir='back' class=' change_deal'     >&laquo;</span>  
-						<span dir='forward' class=' change_deal' >&raquo;</span>
-					-->
-
-						<span dir='back' class=' change_deal'     >left</span>&nbsp;&nbsp;
-						<span dir='forward' class=' change_deal' >right</span>
+										<select id='product_id' name='product_id'    >
+											
+											<?php  echo $option_tags;   ?>
+											
+										</select>					  			
 
 
 				</td>
 				
-				
+				<td>
+										<span dir='back' class=' change_deal'     >&laquo;</span>  
+										<span dir='forward' class=' change_deal' >&raquo;</span>					  			
+					  			
+				</td>	
 				<td>
 												<div id='error'  class='div_buttons'    style='height:50px;background:lightgray;border:1px solid gray'>error log</div>  
 				</td>	
