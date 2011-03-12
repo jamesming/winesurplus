@@ -73,6 +73,8 @@
 				})	
 				
 				$('.change_deal').click(function(event) {
+					
+			
 					if( $(this).attr('dir')=='back'){
 						
 						if($('#product_id option:selected').prev().val() != null ){

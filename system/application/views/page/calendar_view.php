@@ -62,7 +62,7 @@
 														
 														calendar_td.css({background:'lightgreen'});
 														
-														window.parent.window.parent.top_edit_frame.$("#product_id").html('<option>' + data + '</option>')
+														window.parent.window.parent.top_edit_frame.$("#product_id").html(data)
 														// window.parent.window.parent.top_edit_frame.$('#error').html(  data  );
 														// window.parent.$('body').click();
 					
