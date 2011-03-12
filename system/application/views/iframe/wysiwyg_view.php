@@ -55,38 +55,44 @@
 				var product_id = window.parent.$('#product_id').val();
 				
 				
-				if( window.parent.$('#'+div_id_to_edit).attr('static_content') == 1){
-					var static_content = 1;
-				}else{
-					var static_content = 0;
-				};
-				
-				
 				setTimeout(function() { 											
 						mbox.set_text(   window.parent.$('#'+div_id_to_edit).html()  );
 				}, 100);				
 				
+				
 				$('#save').click(function(event) {
+					
+					if( window.parent.$('#'+div_id_to_edit).attr('static_content') == 1){
+							
+						$.post("<?php echo base_url(). 'index.php/page/update_static_content'; ?>",{
+							field: div_id_to_edit,
+							text: mbox.get_html()
+							},function(data) {
+								
+								window.parent.$('#'+div_id_to_edit).html(  mbox.get_html()  ) ;
+								window.parent.$('body').click(); // closes fancy zoom								
+								
+							});		
+							
+					}else{
 						
-						$.post("<?php echo base_url(). 'index.php/page/update'; ?>",{
+						$.post("<?php echo base_url(). 'index.php/page/update_product_html_content'; ?>",{
 							field: div_id_to_edit,
 							text: mbox.get_html(),
-							product_id: product_id,
-							static_content: static_content
+							product_id: product_id
 							},function(data) {
 								
 								window.parent.$('#'+div_id_to_edit).html(  mbox.get_html()  ) ;
 								window.parent.$('body').click(); // closes fancy zoom								
 								
 							});
+						
+					}		
 
-				})	
+				})	// END SAVE CLICK
 				
 
-				
-					
-
-			});
+			}); // END DOCUMENT READY
 	
 
 </script>

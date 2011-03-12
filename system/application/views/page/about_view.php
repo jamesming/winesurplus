@@ -27,7 +27,12 @@
 <div class=' container' >
 	
 		<div   id='about_div' static_content='1'  href='#wysiwyg_div' class="wysiwyg_div_link" >
-				About
+				<?php
+							if( isset( $static_content[0]->about_div  ) )
+								echo $static_content[0]->about_div;
+							else
+								echo "some content"
+				?>
 		</div>
 	
 </div>

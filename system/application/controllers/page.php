@@ -100,9 +100,9 @@ class Page extends Controller {
 		
 		$where_array = array();
 		
-		$default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
+		$static_content = $this->my_database_model->select_from_table( $table = 'static_content', $select_what, $where_array );
 		
-		$data = array('default_content' => $default_content);
+		$data = array('static_content' => $static_content);
 		$this->load->view('page/faq_view', $data);
 	}
 
@@ -124,9 +124,9 @@ class Page extends Controller {
 		
 		$where_array = array();
 		
-		$default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
-
-		$data = array('default_content' => $default_content);
+		$static_content = $this->my_database_model->select_from_table( $table = 'static_content', $select_what, $where_array );
+		
+		$data = array('static_content' => $static_content);
 		$this->load->view('page/about_view', $data);
 	}
 
@@ -218,7 +218,7 @@ function wysiwyg(){
 
 
 /**
- * update
+ * update_static_content
  *
  * {@source }
  * @package BackEnd
@@ -229,17 +229,102 @@ function wysiwyg(){
  * @uses My_database_model::insert_table()
  * @uses My_database_model::get_primary_key()
  * @uses My_database_model::update_table()
- * @path /index.php/dashboard/update
+ * @path /index.php/page/update_static_content
  * @access public
  **/ 
 
-function update(){
+function update_static_content(){
+	
+	$field = $this->input->post('field');
+	$text = $this->input->post('text');
+	$table = 'static_content';
+
+	/**
+	 * Set up the table and the fields
+	 *
+	 **/ 
+
+	$fields_array = array(
+	                        'id' => array(
+	                                                 'type' => 'INT',
+	                                                 'unsigned' => TRUE,
+	                                                 'auto_increment' => TRUE
+	                                      ),
+	                        'created' => array(
+	                                                 'type' => 'DATETIME'
+	                                        ),
+	                        'updated' => array(
+	                                                 'type' => 'DATETIME'
+	                                        )  
+	                );
+	                
+	$primary_key = 'id';
+	
+	$this->my_database_model->create_table_with_fields($table, $primary_key, $fields_array);
+	
+	$fields_array = array(
+	                        $field => array(
+	                                                 'type' => 'BLOB'
+	                                        )                                      
+	                );
+	
+	$this->my_database_model->add_column_to_table_if_exist($table, $fields_array);
+	
+	
+	/**
+	 * Insert into table if not already exist otherwise do an update
+	 *
+	 **/ 
+	 
+  
+			
+	if( $this->my_database_model->get_primary_key( $table, $where_field = $primary_key, '1') == 1){
+
+			$set_what_array = array(
+									$field => $text
+									);			
+							
+			$this->my_database_model->update_table( $table, '1', $set_what_array );
+
+	}else{
+
+				$insert_what = array(
+							$field => $text
+							);	
+				
+				$primary_key = $this->my_database_model->insert_table(
+												$table, 
+												$insert_what
+												); 
+
+	};
+
+
+	
+}
+
+/**
+ * update_product_html_content
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @uses My_database_model::create_table_with_fields()
+ * @uses My_database_model::check_if_exist()
+ * @uses My_database_model::add_column_to_table_if_exist()
+ * @uses My_database_model::insert_table()
+ * @uses My_database_model::get_primary_key()
+ * @uses My_database_model::update_table()
+ * @path /index.php/page/update_product_html_content
+ * @access public
+ **/ 
+
+function update_product_html_content(){
 	
 	$table = 'contents';
 	$field = $this->input->post('field');
 	$text = $this->input->post('text');
 	$product_id = $this->input->post('product_id');
-	$static_content = $this->input->post('static_content');
 
 	/**
 	 * Set up the table and the fields
@@ -387,8 +472,6 @@ function update(){
 
 	
 }
-
-
 
 
 /**
