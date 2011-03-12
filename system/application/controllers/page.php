@@ -28,8 +28,6 @@ class Page extends Controller {
 
 	function Page(){
 		parent::Controller();	
-		
-		
 
 		$select_what =  'id, day_of_year';
 		
@@ -57,9 +55,17 @@ class Page extends Controller {
 	 **/ 
 	
 	function index(){
+		
+		if( $this->uri->segment(3) != '' ){
+			$content_id = $this->uri->segment(3);
+		}else{
+			$content_id = $this->content_id;
+		};
+		
+		
 		$select_what =  '*';
 		
-		$where_array = array('id' => $this->content_id);
+		$where_array = array('id' => $content_id);
 	
 		$contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
 		

@@ -72,6 +72,25 @@
 					
 				})	
 				
+				$('.change_deal').click(function(event) {
+					if( $(this).attr('dir')=='back'){
+						
+						if($('#product_id option:selected').prev().val() != null ){
+								window.parent.bottom_edit_frame.location.href='<?php echo  base_url();   ?>index.php/page/index/' + $('#product_id option:selected').prev().attr('content_id');
+								$('#product_id option:selected').prev().attr('selected',true);
+						}
+						;
+					}else{
+						
+						if($('#product_id option:selected').next().val() != null ){
+								window.parent.bottom_edit_frame.location.href='<?php echo  base_url();   ?>index.php/page/index/' + $('#product_id option:selected').next().attr('content_id');
+								$('#product_id option:selected').next().attr('selected',true);
+						};
+
+					};
+				})				
+				
+				
 				$('#product_id').change(function() {
 					
 					window.parent.bottom_edit_frame.$('#product_id').val(    $('#product_id option:selected').val()   );
@@ -161,6 +180,11 @@
 	vertical-align:middle;
 	font-weight:bold;
 }
+.change_deal{
+	font-weight:bold;	
+	font-size:36px;
+	cursor:pointer;
+}
 
 </style>
 
@@ -186,13 +210,20 @@
 												
 				</td>
 				<td>
-							
-	
-					<select id='product_id' name='product_id'>
+
+							<select id='product_id' name='product_id' >
+								
+								<?php  echo $option_tags;   ?>
+								
+							</select><br>						
 						
-						<?php  echo $option_tags;   ?>
-						
-					</select>
+
+					
+
+						<span dir='back' class=' change_deal'     >&laquo;</span>  
+						<span dir='forward' class=' change_deal' >&raquo;</span>
+
+
 				</td>
 				
 				
@@ -209,5 +240,7 @@
 	</div>
 
 <input id="switch" type="hidden" value="1">
+
+
 
 
