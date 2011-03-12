@@ -216,12 +216,13 @@
 								<?php  echo $option_tags;   ?>
 								
 							</select><br>						
-						
-
-					
-
+<!--						
 						<span dir='back' class=' change_deal'     >&laquo;</span>  
 						<span dir='forward' class=' change_deal' >&raquo;</span>
+					-->
+
+						<span dir='back' class=' change_deal'     >left</span>&nbsp;&nbsp;
+						<span dir='forward' class=' change_deal' >right</span>
 
 
 				</td>
