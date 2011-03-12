@@ -52,8 +52,8 @@ div#tabs li{
 <div   style='display:none'  >
 chrome hack: <input id="hack_to_fix_chrome_bug" type="text" value=""><br>
 div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
-	p: <input id="product_id" type="text" value="<?php  echo $contents[0]->product_id;   ?>"><br>
-	c: <input id="content_id" type="text" value="<?php  echo $contents[0]->id;   ?>">	
+	p: <input id="product_id" type="text" value="<?php  echo ( isset($contents) ? $contents[0]->product_id : '0' ) ?>"><br>
+	c: <input id="content_id" type="text" value="<?php  echo ( isset($contents) ? $contents[0]->id : '0' ) ?>">	
 </div>
 
 <div id='calendar'  href='#wysiwyg_div'  style='display:none'  >
@@ -71,14 +71,10 @@ LOGO
 		
 		<div id='tabs' class='container '   >
 			<ul   >
-				<li id='index'  class='menu_item ' >About</li>		
+				<li id='index'  class='menu_item ' >Today's Deal</li>		
+				<li id='faq' class='menu_item ' >FAQ</li>						
+				<li id='about'  class='menu_item ' >about</li>
 
-				<li id='resume' class='menu_item ' >Resume</li>						
-				<li id='thumbs'  class='menu_item ' >Photos</li>
-
-				<!--<li>Skills</li>-->
-				<li id='reel' class='menu_item ' >Reel</li>
-				<li id='contact' class='menu_item ' >Contact</li>
 			</ul>			
 		</div>		
 	

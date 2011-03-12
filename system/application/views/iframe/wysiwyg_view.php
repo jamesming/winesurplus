@@ -54,14 +54,25 @@
 				var div_id_to_edit = window.parent.$('#div_id_to_edit').val();
 				var product_id = window.parent.$('#product_id').val();
 				
+				
+				if( window.parent.$('#'+div_id_to_edit).attr('static_content') == 1){
+					var static_content = 1;
+				}else{
+					var static_content = 0;
+				};
+				
+				
+				setTimeout(function() { 											
+						mbox.set_text(   window.parent.$('#'+div_id_to_edit).html()  );
+				}, 100);				
+				
 				$('#save').click(function(event) {
-					
-
 						
 						$.post("<?php echo base_url(). 'index.php/page/update'; ?>",{
 							field: div_id_to_edit,
 							text: mbox.get_html(),
-							product_id: product_id
+							product_id: product_id,
+							static_content: static_content
 							},function(data) {
 								
 								window.parent.$('#'+div_id_to_edit).html(  mbox.get_html()  ) ;
@@ -69,13 +80,10 @@
 								
 							});
 
-
 				})	
 				
-				setTimeout(function() { 											
-						mbox.set_text(   window.parent.$('#'+div_id_to_edit).html()  );
-				}, 100);
 
+				
 					
 
 			});

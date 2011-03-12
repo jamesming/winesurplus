@@ -26,15 +26,13 @@
 					window.parent.bottom_edit_frame.$('#edit_product').click()
 				});											
 				
-							
-				
-				$('#clickme').click(function(event) {
+				$('#edit_mode').click(function(event) {
 					
 					  if( $('#switch').val() == 1){  // EDIT MODE
 					  	
 					  	$(this).css({background:'red'});
 					  	
-					  	window.parent.bottom_edit_frame.$('#menu, .edit_embed_div, .edit_div').show();
+					  	window.parent.bottom_edit_frame.$('.edit_div').show();
 					  	
 					  	window.parent.bottom_edit_frame.$('.wysiwyg_div_link').css({cursor:'pointer',background:'lightyellow'})
 					  	.fancyZoom().click(function(event) {
@@ -65,7 +63,6 @@
 					
 				})	
 				
-				
 				$('#logout').click(function(event) {
 					
 					window.parent.location.href='<?php echo  base_url();   ?>index.php/home/signin';
@@ -92,17 +89,12 @@
 					};
 				})				
 				
-				
 				$('#product_id').change(function() {
 					
 					window.parent.bottom_edit_frame.$('#product_id').val(    $('#product_id option:selected').val()   );
 					window.parent.bottom_edit_frame.$('#content_id').val(    $('#product_id option:selected').attr('content_id')   );
 
-					//window.parent.bottom_edit_frame.$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/calendar/' + window.parent.bottom_edit_frame.$('#content_id').val() );
-					//window.parent.bottom_edit_frame.$('#logo_img').click();
-					
 					window.parent.bottom_edit_frame.$('body').click();
-
 
 					window.parent.bottom_edit_frame.$('.wysiwyg_div_link')
 					.each(  function( i ){ 
@@ -200,9 +192,9 @@ text-align:center;
 				<td width=44% style='vertical-align:middle'>
 					
 					
-							<div id='clickme'  class='div_buttons rounded_border'     >edit mode</div>
+							<div id='edit_mode'  class='div_buttons rounded_border'     >edit mode</div>
 							
-							<div id='calendar'  class='div_buttons rounded_border'   style='background:purple;'  >book deal</div>
+							<div id='calendar'  class='div_buttons rounded_border'   style='background:purple;'  >calendar</div>
 							
 							<div id='publish'  class='div_buttons rounded_border'    style='background:darkgreen;'>publish</div>  
 					

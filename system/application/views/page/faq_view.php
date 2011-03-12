@@ -26,8 +26,8 @@
 	
 <div class=' container' >
 	
-		<div   id='about_div' static_content='1'  href='#wysiwyg_div' class="wysiwyg_div_link" >
-				About
+		<div   id='faq_div' static_content='1'  href='#wysiwyg_div' class="wysiwyg_div_link" >
+				FAQ
 		</div>
 	
 </div>

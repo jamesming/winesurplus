@@ -70,6 +70,7 @@ class Page extends Controller {
 		$contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array );
 		
 
+	
 		$select_what =  '*';
 		
 		$where_array = array();
@@ -78,10 +79,59 @@ class Page extends Controller {
 
 
 		$data = array( 'default_content' => $default_content, 'contents' => $contents);
-		$this->load->view('page/about_view', $data);
+		$this->load->view('page/index_view', $data);
 	
 	}	
 	
+
+	/**
+	 * faq
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/faq
+	 * @access public
+	 **/ 
+	
+	function faq(){
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
+		
+		$data = array('default_content' => $default_content);
+		$this->load->view('page/faq_view', $data);
+	}
+
+	
+
+	/**
+	 * about
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/about
+	 * @access public
+	 **/ 
+	
+	function about(){
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
+
+		$data = array('default_content' => $default_content);
+		$this->load->view('page/about_view', $data);
+	}
+
+
+
 
 
 	/**
@@ -189,6 +239,7 @@ function update(){
 	$field = $this->input->post('field');
 	$text = $this->input->post('text');
 	$product_id = $this->input->post('product_id');
+	$static_content = $this->input->post('static_content');
 
 	/**
 	 * Set up the table and the fields
@@ -200,10 +251,6 @@ function update(){
 	                                                 'type' => 'INT',
 	                                                 'unsigned' => TRUE,
 	                                                 'auto_increment' => TRUE
-	                                      ),
-	                        'product_id' => array(
-	                                                 'type' => 'INT',
-	                                                 'unsigned' => TRUE
 	                                      ),
 	                        'created' => array(
 	                                                 'type' => 'DATETIME'
@@ -220,7 +267,11 @@ function update(){
 	$fields_array = array(
 	                        $field => array(
 	                                                 'type' => 'BLOB'
-	                                        )                                      
+	                                        ),
+	                        'product_id' => array(
+	                                                 'type' => 'INT',
+	                                                 'unsigned' => TRUE
+	                                      )                                      
 	                );
 	
 	$this->my_database_model->add_column_to_table_if_exist($table, $fields_array);
