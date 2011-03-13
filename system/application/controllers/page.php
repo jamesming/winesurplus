@@ -24,25 +24,47 @@
  */
 class Page extends Controller {
 	
-	private $content_id;
 
 	function Page(){
 		parent::Controller();	
 
-		$select_what =  'id, day_of_year';
-		
-		$where_array = array(
-		'day_of_year' . ' <= ' =>  date('z',time())
-		);
-	
-		$contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'desc', $limit = 1);
-		
-		$this->content_id = $contents[0]->id;
-
-		
 
 	}
 	
+
+	/**
+	 * test
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/test
+	 * @access public
+	 **/ 
+	
+	function test(){
+
+		$this->load->view('page/test_view');	
+		
+	}
+
+
+
+	/**
+	 * test_inside
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/_inside
+	 * @access public
+	 **/ 
+	
+	function test_inside(){
+
+		$this->load->view('page/test_inside_view');	
+		
+	}
 
 	/**
 	 * index
@@ -56,10 +78,20 @@ class Page extends Controller {
 	
 	function index(){
 		
+		$select_what =  'id, day_of_year';
+		
+		$where_array = array(
+		'day_of_year' . ' <= ' =>  date('z',time())
+		);
+	
+		$contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'desc', $limit = 1);
+		
+		$content_id = $contents[0]->id;
+
+		
+		
 		if( $this->uri->segment(3) != '' ){
 			$content_id = $this->uri->segment(3);
-		}else{
-			$content_id = $this->content_id;
 		};
 		
 		
@@ -166,7 +198,16 @@ class Page extends Controller {
 
 function edit_panel(){
 	
-	$content_id = $this->content_id;
+	$select_what =  'id, day_of_year';
+	
+	$where_array = array(
+	'day_of_year' . ' <= ' =>  date('z',time())
+	);
+
+	$contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'desc', $limit = 1);
+	
+	$content_id = $contents[0]->id;
+
 	
 	$select_what =  'products.name, contents.id, contents.product_id, contents.year, contents.month, contents.day';
 	
