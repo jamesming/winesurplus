@@ -4,50 +4,20 @@
 	
 					$(document).ready(function() { 
 						
-						if(  window.parent.document.getElementById('top_edit_frame')  ){  
-								$('#calendar').fancyZoom().click(function(event) {
-										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/calendar/' + $('#content_id').val() );
-								});	
-								$('#add_product').fancyZoom().click(function(event) {
-										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' );
-								});			
-								$('#edit_product').fancyZoom().click(function(event) {
-										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' + $('#product_id').val() + '/' +  $('#content_id').val());
-								});									
-						};
+
 						
-						$('.menu_item').click(function(event) {
-							redirect_to($(this));
-						});			
+
 						
 						$('#hack_to_fix_chrome_bug').val(1);	
 											
 					});
 					
-					function redirect_to(element){
-						document.location.href='<?php echo  base_url();   ?>index.php/page/' + element.attr('id');
-					}
+
 					
 					
 </script>
 
-<style>	
-	
-div#tabs li{
-	border:1px solid white;
-	list-style:none;
-	float:left; 
-	width:100px; 
-	height:auto;
-	color:red;
-	font-size:15px;
-	font-weight:bold;
-	width:130px;
-	text-align:center;
-	cursor:pointer;
-}		
 
-</style>
 
 <div   style='display:none'  >
 chrome hack: <input id="hack_to_fix_chrome_bug" type="text" value=""><br>
@@ -56,6 +26,9 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 	c: <input id="content_id" type="text" value="<?php  echo ( isset($contents) ? $contents[0]->id : '0' ) ?>">	
 </div>
 
+<!--  
+ THE FOLLOWING HIDDEN DIV ARE CLICK ACTIVATED BY TOP IFRAME EDIT PANEL
+-->
 <div id='calendar'  href='#wysiwyg_div'  style='display:none'  >
 </div>
 <div id='add_product'  href='#wysiwyg_div'  style='display:none'  >
@@ -63,20 +36,105 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 <div id='edit_product'  href='#wysiwyg_div'  style='display:none'  >
 </div>
 
-<div  id='top_area' style='background:white'  >
-	
-		<div id='logo_img'   href='#wysiwyg_div'  class='container'     style='font-size:23px'   >
-LOGO
+
+		<style>	
+		div#top span{
+		display:block;
+		}
+		div#top div:nth-child(3){
+		background: lightgray;
+		}
+		div#top div:nth-child(1){
+		background: orange;
+		height:auto;
+		}
+		div#top div:nth-child(1) span{
+		margin:10px;
+		background: blue;
+		color:white;
+		text-align:center;
+		height:50px;
+		padding:7px 0px;
+		}		
+		div#top div:nth-child(3){
+		background: lightgray;
+		}
+		div#top div:nth-child(3) span{
+		background: lightgreen;
+		text-align:center;
+		padding:5px 0px;
+		}
+		</style>
+		
+		<div id='top' class=' container'      >
+			<div  class='span-5 ' >
+				<span   >
+					logo
+				</span>
+			</div>
+			<div  class='span-15 ' >
+				&nbsp;
+			</div>
+			<div  class='span-4 last' >
+				
+				<span>
+					account
+				</span>
+				
+				<span>
+					refer
+				</span>
+				
+				<span>
+					twitter/facebook
+				</span>
+				
+			</div>
 		</div>
 		
-		<div id='tabs' class='container '   >
-			<ul   >
-				<li id='index'  class='menu_item ' >Today's Deal</li>		
-				<li id='faq' class='menu_item ' >FAQ</li>						
-				<li id='about'  class='menu_item ' >about</li>
-
-			</ul>			
-		</div>		
+		<style>
+		div#howworks{
+		padding:20px 0px;
+		background:green;
+		height:94px;
+		}
+		div#howworks div{
+		height:70px;
+		margin-bottom:10px;
+		margin-left:10px;
+		width:80px;
+		float:left;	
+		padding-top:24px;
+		}
+		div#howworks div:nth-child(even){
+			width:182px;
+			background:lightblue;
+			text-align:center;
+			color:white;
+			font-size:20px;
+		}
+		</style>
+		
+		<div id='howworks' >
+			<divclass=' container'  >
+				<div>
+				</div>
+				<div>Purchase
+				</div>
+				<div>  
+				</div>
+				<div>Charity
+				</div>
+				<div>
+				</div>
+				<div>Enjoy
+				</div>
+				<div>
+				</div>
+			</div>			
+		</div>
+		
+		
 	
 	
-</div>
+	

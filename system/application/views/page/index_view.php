@@ -24,60 +24,171 @@
 	
 	
 	
-<div class=' container' >
 	
-		<div   id='name_div'   href='#wysiwyg_div' class="wysiwyg_div_link" >
-			<?php     
+	
+	
+	
+	
+	
+	
+	
+	
+		<hr   style='height:15px;background:darkred'  >
+		
+		<style>
+
+		div#main div:nth-child(1) div{
+		}
+		.price{
+		height:90px;
+		padding-left:20px;	
+		}
+
+		</style>
+		
+		<div id='main'  class=' container'   style='margin-top:10px;'  >
 			
-			if( isset( $contents[0]->name_div  ) ){
-				echo $contents[0]->name_div;
-			}else{
-				echo $default_content[0]->name_div;
-			};
+			<!-- LEFT PANEL  -->
+			<div  class='span-13 '    style='
+						background: lightgray;
+						text-align:center;
+						'   
+				>
+				
+					<div class=' rounded_border '   style='
+																					background:yellow;
+																					margin:20px;
+																					height:435px;'
+		      >
+						
+										
+						<!-- 
+						/**
+						*		edit.png
+						**/
+						-->
+					
+					  <div  class='edit_div'    style='
+					  	float:right;
+					  	position: relative;
+					  	display:none;
+					  	'  >
+					  	<a  style='margin-top:9px;margin-right:59px;' >
+					  	<img href="#product_image"   class="product_image_link edit_png"  src='<?php echo base_url();    ?>images/edit.png'>
+					  	</a>
+					  	
+					  </div>	
+					  
+					  <br><br>
+				
+						<div     >
+							
+									<img id='product_img'   style='width:440px;margin-top:-29px'  src='<?php 
+									
+							  		  if( !is_file('uploads/product_images/' . $contents[0]->product_id . '/image.png' ) ){
+				        				echo base_url() . "images/no_image.png?random=" . rand();
+				    					}else{
+							  				echo base_url(). "uploads/product_images/" . $contents[0]->product_id . "/image.png";
+							  			}
+									
+									?>'>			
+							
+							
+						</div>	
+						
+						
+						
+						
+						
+						
+					</div>
+				
+			</div>
 			
-			?>
+			<!-- RIGHT PANEL  -->
+			<div id='right_column' class='span-11 last'   style='background:lightgray;height:500px'    >
+				
+				
+				<div   style='
+					padding-top:20px;
+					padding-left:20px;
+					padding-right:20px;
+					'  id='name_div'   href='#wysiwyg_div' class="wysiwyg_div_link" >
+								<?php     
+			
+									if( isset( $contents[0]->name_div  ) ){
+										echo $contents[0]->name_div;
+									}else{
+										echo $default_content[0]->name_div;
+									};
+								
+								?>
+				</div>
+				
+				<div  style='padding:20px;'   id='description_div'   href='#wysiwyg_div' class="wysiwyg_div_link"   >
+								<?php     
+			
+									if( isset( $contents[0]->description_div  ) ){
+										echo $contents[0]->description_div;
+									}else{
+										echo $default_content[0]->description_div;
+									};
+								
+								?>
+				</div>
+				
+				<div   id='retail_price_div' class='wysiwyg_div_link price'    href='#wysiwyg_div' >
+								<?php     
+				
+									if( isset( $contents[0]->retail_price_div  ) ){
+										echo $contents[0]->retail_price_div;
+									}else{
+										echo $default_content[0]->retail_price_div;
+									};
+								
+								?>
+				</div>
+				
+				<div  id='discount_price_div' class="wysiwyg_div_link price"   href='#wysiwyg_div' >
+								<?php     
+				
+									if( isset( $contents[0]->discount_price_div ) ){
+										echo $contents[0]->discount_price_div;
+									}else{
+										echo $default_content[0]->discount_price_div;
+									};
+								
+								?>
+				</div>
+				
+				<div>
+								<!--  BUY BUTTON  -->
+								<div id='buy' class='rounded_border cursor_pointer'   style='
+									margin:0px auto;
+									background:orange;
+									font-weight:bold;
+									color:white;
+									width:100px;
+									height:35px;
+									padding-top:7px;
+									text-align:center;
+									'  >
+								buy
+								</div>	
+												
+				</div>
+				
+
+			</div>
+			
+			
 		</div>
-	</div>
 	
-</div>
-
-
-<div class=' container' >
 	
-		<div   id='retail_price_div'   href='#wysiwyg_div'class="wysiwyg_div_link" >
-			<?php     
-			
-			if( isset( $contents[0]->retail_price_div  ) ){
-				echo $contents[0]->retail_price_div;
-			}else{
-				echo $default_content[0]->retail_price_div;
-			};
-			
-			?>
-		</div>
-	</div>
 	
-</div>
-
-
-<div class=' container' >
 	
-		<div   id='discount_price_div'   href='#wysiwyg_div' class="wysiwyg_div_link" >
-			<?php     
-			
-			if( isset( $contents[0]->discount_price_div ) ){
-				echo $contents[0]->discount_price_div;
-			}else{
-				echo $default_content[0]->discount_price_div;
-			};
-			
-			?>
-		</div>
-	</div>
-	
-</div>
 
-<div class=' container' >
+<div class=' container'   style='display:none'   >
 	
 		<div   id='reviews_div'   href='#wysiwyg_div' class="wysiwyg_div_link" >
 			<?php     
@@ -95,69 +206,7 @@
 </div>
 	
 	
-<div  class=' container'   style='height:200px;padding-top:30px'  >
-	
-	<div id='product_image_container' class=' span-5'  >
-		
-		<!-- 
-		/**
-		*		edit.png
-		**/
-		-->
-	
-	  <div  class='edit_div'    style='
-	  	float:right;
-	  	position: relative;
-	  	display:none;
-	  	'  >
-	  	<a  style='margin-top:9px;margin-right:59px;' >
-	  	<img href="#product_image"   class="product_image_link edit_png"  src='<?php echo base_url();    ?>images/edit.png'>
-	  	</a>
-	  	
-	  </div>	
-	  
-	  <br><br>
 
-		<div     >
-			
-					<img id='product_img'   style='width:150px;margin-top:-29px'  src='<?php 
-					
-			  		  if( !is_file('uploads/product_images/' . $contents[0]->product_id . '/image.png' ) ){
-        				echo base_url() . "images/no_image.png?random=" . rand();
-    					}else{
-			  				echo base_url(). "uploads/product_images/" . $contents[0]->product_id . "/image.png";
-			  			}
-					
-					?>'>			
-			
-			
-		</div>
-
-		
-		
-		
-		
-	</div>
-	
-
-	
-	
-	<div  class='span-19 last'   >
-		<div   id='description_div'   href='#wysiwyg_div' class="wysiwyg_div_link" >
-			<?php     
-			
-			if( isset( $contents[0]->description_div  ) ){
-				echo $contents[0]->description_div;
-			}else{
-				echo $default_content[0]->description_div;
-			};
-			
-			?>
-		</div>
-	</div>
-		
-	
-</div>
 
 
 	

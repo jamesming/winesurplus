@@ -639,7 +639,7 @@ function upload_image(){
 	{	
 		
 		
-		$this->tools->resize_this(  $full_path = 'uploads/product_images/' . $this->input->post('product_id') . '/image.png' , $width = 170, $height=170);
+		$this->tools->resize_this(  $full_path = 'uploads/product_images/' . $this->input->post('product_id') . '/image.png' , $width = 440, $height=170);
 		
 		$data= array('product_id' => $this->input->post('product_id'));
 		

@@ -3,8 +3,7 @@
 </head>
 
 	
-<body>	
-<div   style='background:gray'  >
+<body style='background:gray' >	
 
 		<style>	
 		div#top span{
@@ -64,11 +63,11 @@
 		<style>
 		div#howworks{
 		padding:20px 0px;
-		background:green;	
+		background:green;
+		height:94px;
 		}
 		div#howworks div{
 		height:70px;
-		margin-top:10px;	
 		margin-bottom:10px;
 		margin-left:10px;
 		width:80px;
@@ -84,65 +83,101 @@
 		}
 		</style>
 		
-		<div id='howworks' class=' container'  >
-			<div>
-			</div>
-			<div>Purchase
-			</div>
-			<div>  
-			</div>
-			<div>Charity
-			</div>
-			<div>
-			</div>
-			<div>Enjoy
-			</div>
-			<div>
-			</div>
+		<div id='howworks' >
+			<divclass=' container'  >
+				<div>
+				</div>
+				<div>Purchase
+				</div>
+				<div>  
+				</div>
+				<div>Charity
+				</div>
+				<div>
+				</div>
+				<div>Enjoy
+				</div>
+				<div>
+				</div>
+			</div>			
 		</div>
+
 		
-		<hr   style='height:40px;background:darkred'  >
+		<hr   style='height:15px;background:darkred'  >
 		
 		<style>
-		div#main{
-		margin-top:10px;
+
+		div#main div:nth-child(1) div{ /* image */
+		background:yellow;
+		margin:20px;
+		height:435px;
 		}
-		div#main div{
-		height:300px;	
-		background: lightgray;
-		text-align:center;
+		.price{
+		height:90px;	
 		}
-		div#main p{
-		background: darkgray;
-		text-align:left;
-		padding:10px;
-		}		
-		div#main p:nth-child(2){
-		height:160px;
-		}	
+
 		</style>
 		
-		<div id='main'  class=' container' >
-			<div  class='span-14 '   >
-				image
+		<div id='main'  class=' container'   style='margin-top:10px;'  >
+			
+			<!-- LEFT PANEL  -->
+			<div  class='span-13 '    style='
+						background: lightgray;
+						text-align:center;
+						'   
+				>
+				
+					<div class=' rounded_border '     >
+						image
+					</div>
+				
 			</div>
-			<div  class='span-10 last'   >
-				<p>
+			
+			<!-- RIGHT PANEL  -->
+			<div id='right_column' class='span-11 last'   style='background:lightgray'    >
+				
+				
+				<div   style='
+					padding-top:20px;
+					padding-left:20px;
+					padding-right:20px;
+					'  >
 					title of wine
-				</p>
-				<p>
+				</div>
+				
+				<div  style='padding:20px;'   >
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur malesuada blandit massa eu sodales. Morbi lacus quam, consectetur quis ultrices nec, fermentum eget est. Duis consectetur nunc at felis mollis sollicitudin. Praesent egestas eleifend tellus, ut mattis neque dignissim sed. Phasellus ac augue in ipsum ornare consequat a sit amet arcu. Mauris eget urna arcu. Nulla quis lacus lectus. Integer elementum consectetur mi vel eleifend. Ut fermentum augue nisi, in dictum sem. Integer accumsan quam nulla. Cras volutpat sollicitudin purus at venenatis
 				</p>
-				<div id='buy' class='rounded_border cursor_pointer'   style='
-					margin:0px auto;
-					background:orange;
-					color:white;
-					width:100px;
-					height:30px;
-					'  >
-				buy
+				
+				<div  class=' price' >
+					retail_price
 				</div>
+				
+				<div class=' price'>
+					discount_price
+				</div>
+				
+				<div>
+								<!--  BUY BUTTON  -->
+								<div id='buy' class='rounded_border cursor_pointer'   style='
+									margin:0px auto;
+									background:orange;
+									font-weight:bold;
+									color:white;
+									width:100px;
+									height:35px;
+									padding-top:7px;
+									text-align:center;
+									'  >
+								buy
+								</div>	
+												
+				</div>
+				
+
 			</div>
+			
+			
 		</div>
 		
 		
