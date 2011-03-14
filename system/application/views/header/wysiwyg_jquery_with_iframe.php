@@ -11,12 +11,37 @@
 									window.parent.bottom_edit_frame.$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/wysiwyg');
 								});
 							
-								$('.product_image_link').css({cursor:'pointer'})
-								.fancyZoom().click(function(event) {
-									$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + $('#product_id').val());
-								});		
+//								$('.product_image_link').css({cursor:'pointer'})
+//								.fancyZoom().click(function(event) {
+//									$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + $('#product_id').val());
+//								});		
 								
+
+									//** UPLOAD IMAGE OF WINE
+									$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + $('#product_id').val());
+									$('.product_image_link').css({cursor:'pointer'})
+									.click(function(event) {
+												var submit_iframe = document.getElementById('iframe_content_image').contentWindow;
+												submit_iframe.$('#select_file').click();									
+												submit_iframe.$('input[type=file]').change(function(e){
+											  	submit_iframe.$('#uploadForm').submit();
+												});
+									});		
+
+
 								$('.edit_div').show();
+								
+								
+								
+								
+//								$('#add_button').click(function(event) {
+//										$('#select_file').click();
+//								});	
+						  
+								
+								
+								
+								
 								
 						};
 						

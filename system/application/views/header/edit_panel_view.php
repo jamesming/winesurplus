@@ -40,10 +40,17 @@
 								window.parent.bottom_edit_frame.$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/wysiwyg');
 							});
 							
+							//** UPLOAD IMAGE OF WINE
+							window.parent.bottom_edit_frame.$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + window.parent.bottom_edit_frame.$('#product_id').val());
 							window.parent.bottom_edit_frame.$('.product_image_link').css({cursor:'pointer'})
-							.fancyZoom().click(function(event) {
-								window.parent.bottom_edit_frame.$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + window.parent.bottom_edit_frame.$('#product_id').val());
+							.click(function(event) {
+										var submit_iframe = window.parent.bottom_edit_frame.document.getElementById('iframe_content_image').contentWindow;
+										submit_iframe.$('#select_file').click();									
+										submit_iframe.$('input[type=file]').change(function(e){
+									  	submit_iframe.$('#uploadForm').submit();
+										});
 							});		
+							
 
 					  	$('#switch').val('0');
 					  	

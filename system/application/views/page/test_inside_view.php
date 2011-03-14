@@ -8,25 +8,30 @@
 
 		<style>	
 		div#top span{
-			display:block;
+		display:block;
 		}
 		div#top div:nth-child(3){
 		background: lightgray;
 		}
 		div#top div:nth-child(1){
 		background: orange;
-		height:54px;
+		height:auto;
 		}
 		div#top div:nth-child(1) span{
 		margin:10px;
 		background: blue;
 		color:white;
 		text-align:center;
-		height:30px;
-		}
-		
+		height:50px;
+		padding:7px 0px;
+		}		
 		div#top div:nth-child(3){
 		background: lightgray;
+		}
+		div#top div:nth-child(3) span{
+		background: lightgreen;
+		text-align:center;
+		padding:5px 0px;
 		}
 		</style>
 		
