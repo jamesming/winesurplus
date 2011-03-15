@@ -83,7 +83,7 @@
 				
 						<div     >
 							
-									<img id='product_img'   style='width:440px;margin-top:-29px'  src='<?php 
+									<img id='product_img'   style='width:442px;margin-top:-29px'  src='<?php 
 									
 							  		  if( !is_file('uploads/product_images/' . $contents[0]->product_id . '/image.png' ) ){
 				        				echo base_url() . "images/no_image.png?random=" . rand(5, 15);

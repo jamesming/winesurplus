@@ -163,6 +163,140 @@ class Page extends Controller {
 	}
 
 
+	/**
+	 * team
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/team
+	 * @access public
+	 **/ 
+	
+	function team(){
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$static_content = $this->my_database_model->select_from_table( $table = 'static_content', $select_what, $where_array );
+		
+		$data = array('static_content' => $static_content);
+		$this->load->view('page/team_view', $data);
+	}
+
+
+	/**
+	 * shipping
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/shipping
+	 * @access public
+	 **/ 
+	
+	function shipping(){
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$static_content = $this->my_database_model->select_from_table( $table = 'static_content', $select_what, $where_array );
+		
+		$data = array('static_content' => $static_content);
+		$this->load->view('page/shipping_view', $data);
+	}
+
+
+	/**
+	 * returns
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/returns
+	 * @access public
+	 **/ 
+	
+	function returns(){
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$static_content = $this->my_database_model->select_from_table( $table = 'static_content', $select_what, $where_array );
+		
+		$data = array('static_content' => $static_content);
+		$this->load->view('page/returns_view', $data);
+	}
+
+	/**
+	 * terms
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/terms
+	 * @access public
+	 **/ 
+	
+	function terms(){
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$static_content = $this->my_database_model->select_from_table( $table = 'static_content', $select_what, $where_array );
+		
+		$data = array('static_content' => $static_content);
+		$this->load->view('page/terms_view', $data);
+	}
+
+	/**
+	 * privacy
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/privacy
+	 * @access public
+	 **/ 
+	
+	function privacy(){
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$static_content = $this->my_database_model->select_from_table( $table = 'static_content', $select_what, $where_array );
+		
+		$data = array('static_content' => $static_content);
+		$this->load->view('page/privacy_view', $data);
+	}
+
+
+	/**
+	 * contact
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/contact
+	 * @access public
+	 **/ 
+	
+	function contact(){
+		
+		$select_what =  '*';
+		
+		$where_array = array();
+		
+		$static_content = $this->my_database_model->select_from_table( $table = 'static_content', $select_what, $where_array );
+		
+		$data = array('static_content' => $static_content);
+		$this->load->view('page/contact_view', $data);
+	}
 
 
 
@@ -639,7 +773,7 @@ function upload_image(){
 	{	
 		
 		
-		$this->tools->resize_this(  $full_path = 'uploads/product_images/' . $this->input->post('product_id') . '/image.png' , $width = 440, $height=170);
+		$this->tools->resize_this(  $full_path = 'uploads/product_images/' . $this->input->post('product_id') . '/image.png' , $width = 442, $height=412);
 		
 		$data= array('product_id' => $this->input->post('product_id'));
 		
@@ -828,142 +962,62 @@ function update_contents_with_date(){
 	}
 
 
-/**
- * iframe_jcrop_form
- *
- * {@source }
- * @package BackEnd
- * @author James Ming <jamesming@gmail.com>
- * @path /index.php/page/iframe_jcrop_form
- * @access public
- **/ 
+	/**
+	 * iframe_jcrop_form
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/iframe_jcrop_form
+	 * @access public
+	 **/ 
 
 	function iframe_jcrop_form(){
 		
-		echo "test";
+			$dir_path = 'uploads/product_images/' . $this->uri->segment(3);
+			
+			$image_information = getimagesize($dir_path . '/' . 'image.png');
+			
+			$width_of_file = $image_information[0];
+			$height_of_file = $image_information[1];
+			
+		
+			$data= array('product_id' => $this->uri->segment(3), 'width_of_file' => $width_of_file, 'height_of_file' => $height_of_file);	
+			
+			
+			$this->load->view('iframe/iframe_view', $data);
+
 	}
 
-/**
- * iframe_form_to_add_or_edit_product
- *
- * {@source }
- * @package BackEnd
- * @author James Ming <jamesming@gmail.com>
- * @path /index.php/page/iframe_form_to_add_or_edit_product
- * @access public
- **/ 
+
+	
+	
+	/**
+	 * crop
+	 *
+	 * {@source }
+	 * @package BackEnd
+	 * @author James Ming <jamesming@gmail.com>
+	 * @path /index.php/page/crop
+	 * @access public
+	 **/ 
+	 
  
- 
-  function add_or_update_product(){
+  function crop(){
   	
-  	$product_id = $this->input->post('product_id');
-  	$content_id = $this->input->post('content_id');
+		$product_id = $this->uri->segment(3);
+		
+		$dir_path = "uploads/product_images/"  . $product_id . '/';
+		
+		$x_origin = $this->input->post('x_origin');
+		$y_origin = $this->input->post('y_origin');
+		$width = $this->input->post('width');
+		$height = $this->input->post('height');
 
-
-	
-		$fields_array = array(
-		                        'id' => array(
-		                                                 'type' => 'INT',
-		                                                 'unsigned' => TRUE,
-		                                                 'auto_increment' => TRUE
-		                                      ),
-		                        'created' => array(
-		                                                 'type' => 'DATETIME'
-		                                        ),
-		                        'updated' => array(
-		                                                 'type' => 'DATETIME'
-		                                        )  
-		                );
-		                
-		$primary_key = 'id';
-		
-		$this->my_database_model->create_table_with_fields($table='products', $primary_key, $fields_array);
-		
-		$fields_array = array(
-		                        'name' => array(
-		                                                 'type' => 'varchar(255)'
-		                                        ),   
-		                        'price' => array(
-		                                                 'type' => 'decimal(2)'
-		                                        ),   
-		                        'discount' => array(
-		                                                 'type' => 'decimal(2)'
-		                                        )                                    
-		                );
-		
-		$this->my_database_model->add_column_to_table_if_exist($table, $fields_array);
-		
-		
-		/**
-		 * Insert into table if not already exist otherwise do an update
-		 *
-		 **/ 
-		 
-		 
-		 
-	  $where_array = array('id' => $this->input->post('product_id'));
-		$table = 'products';
-
-	  if( $this->my_database_model->check_if_exist($where_array, $table) ){
-	     
-					$set_what_array = array(
-									'name' => $this->input->post('name'),
-									'price' => $this->input->post('price'),
-									'discount' => $this->input->post('discount')
-											);			
-								
-					$this->my_database_model->update_table( $table, $primary_key = $product_id, $set_what_array );
-
-
-	  }else{
-		
-					$insert_what = array(
-								'name' => $this->input->post('name'),
-								'price' => $this->input->post('price'),
-								'discount' => $this->input->post('discount')
-								);	
-					
-					$product_id = $this->my_database_model->insert_table(
-													$table = 'products', 
-													$insert_what
-													); 
-													
-					$insert_what = array(
-								'product_id' => $product_id
-								);	
-					
-					$content_id = $this->my_database_model->insert_table(
-													$table = 'contents', 
-													$insert_what
-													); 													
-													
-													
-		}
-		
-
-
-	$select_what =  'products.name,contents.id, contents.product_id, contents.year, contents.month, contents.day';
-	
-	$where_array = array();
-	
-	$join_array = array(
-								'products' => 'products.id = contents.product_id'
-								);
-								
-	
-	$all_contents = $this->my_database_model->select_from_table( $table = 'contents', $select_what, $where_array, $use_order = TRUE, $order_field = 'day_of_year', $order_direction = 'asc', $limit = -1, $use_join = TRUE, $join_array );
-		
-		
-		
-	echo $this->custom->generate_option_tags( $all_contents, $selected_content_id = $content_id );
-
-
-
-		
-	
-	}
-	
-	
+		$this->tools->crop_and_name_it( $new_name = 'image.png', $dir_path.'image.png', $dir_path, $width, $height, $x_origin, $y_origin );
+    
+  }
+  	
 
 } // END CLASS
 
