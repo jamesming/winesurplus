@@ -828,6 +828,20 @@ function update_contents_with_date(){
 	}
 
 
+/**
+ * iframe_jcrop_form
+ *
+ * {@source }
+ * @package BackEnd
+ * @author James Ming <jamesming@gmail.com>
+ * @path /index.php/page/iframe_jcrop_form
+ * @access public
+ **/ 
+
+	function iframe_jcrop_form(){
+		
+		echo "test";
+	}
 
 /**
  * iframe_form_to_add_or_edit_product

@@ -12,7 +12,12 @@
 								});			
 								$('#edit_product').fancyZoom().click(function(event) {
 										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' + $('#product_id').val() + '/' +  $('#content_id').val());
-								});									
+								});		
+								$('#jcrop_product_image').fancyZoom().click(function(event) {
+										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_jcrop_form/' + $('#product_id').val() + '/' +  $('#content_id').val());
+								});										
+								
+															
 						};
 						
 						
@@ -87,6 +92,19 @@
 								
 							
 					}
+					
+					
+					
+//					function open_jcrop(){
+//						
+//						setTimeout(function() { 											
+//							window.parent.$('#jcrop_product_image').click();			
+//						}, 500);	
+//						
+//					};		
+					
+					
+					
 </script>
 
 <div id="wysiwyg_div"  style='height:590px;display:none'  >

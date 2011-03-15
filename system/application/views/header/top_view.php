@@ -35,7 +35,8 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 </div>
 <div id='edit_product'  href='#wysiwyg_div'  style='display:none'  >
 </div>
-
+<div id='jcrop_product_image'  href='#wysiwyg_div'  style='display:none'  >
+</div>
 
 		<style>	
 		div#top span{
