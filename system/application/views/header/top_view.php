@@ -96,7 +96,6 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 		<style>
 		div#howworks{
 		padding:20px 0px;
-		background:green;
 		height:94px;
 		}
 		div#howworks div{
@@ -116,25 +115,32 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 		}
 		</style>
 		
-		<div id='howworks' >
-			<divclass=' container'  >
-				<div>
-				</div>
-				<div>Purchase
-				</div>
-				<div>  
-				</div>
-				<div>Charity
-				</div>
-				<div>
-				</div>
-				<div>Enjoy
-				</div>
-				<div>
-				</div>
-			</div>			
+		<div   style='background:green'  >
+			
+					<div class=' container'  >		
+						<div id='howworks' >
+				
+								<div>
+								</div>
+								<div>Purchase
+								</div>
+								<div>  
+								</div>
+								<div>Charity
+								</div>
+								<div>
+								</div>
+								<div>Enjoy
+								</div>
+								<div>
+								</div>
+					
+						</div>
+					</div>		
+			
+			
 		</div>
-		
+
 		
 	
 	
