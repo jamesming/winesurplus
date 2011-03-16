@@ -30,18 +30,8 @@
 								});
 							
 
-								//** UPLOAD IMAGE OF WINE
-								$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + $('#product_id').val());
-								$('.product_image_link').css({cursor:'pointer'})
-								.click(function(event) {
-											var submit_iframe = document.getElementById('iframe_content_image').contentWindow;
-											submit_iframe.$('#select_file').click();									
-											submit_iframe.$('input[type=file]').change(function(e){
-										  	submit_iframe.$('#uploadForm').submit();
-											});
-								});		
-
-
+								bind_click_to_product_img();  // goto: line 97 below
+								
 								$('.edit_div').show();
 								
 								
@@ -103,6 +93,21 @@
 						
 					};		
 					
+					
+					function bind_click_to_product_img(){
+						
+						//** UPLOAD IMAGE OF WINE
+						$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/upload_image_form/' + $('#product_id').val());
+						$('.product_image_link').css({cursor:'pointer'})
+						.click(function(event) {
+									var submit_iframe = document.getElementById('iframe_content_image').contentWindow;
+									submit_iframe.$('#select_file').click();									
+									submit_iframe.$('input[type=file]').change(function(e){
+								  	submit_iframe.$('#uploadForm').submit();
+									});
+						});	
+						
+					}
 					
 					
 </script>

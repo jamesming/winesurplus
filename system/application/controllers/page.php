@@ -993,7 +993,7 @@ function update_contents_with_date(){
 			$data= array('product_id' => $this->uri->segment(3), 'width_of_file' => $width_of_file, 'height_of_file' => $height_of_file);	
 			
 			
-			$this->load->view('iframe/iframe_view', $data);
+			$this->load->view('iframe/iframe_jcrop_view', $data);
 
 	}
 
@@ -1023,7 +1023,10 @@ function update_contents_with_date(){
 		$height = $this->input->post('height');
 
 		$this->tools->crop_and_name_it( $new_name = 'image.png', $dir_path.'transition.png', $dir_path, $width, $height, $x_origin, $y_origin );
-    
+
+		// ** Delete transitional image
+		$this->tools->recursiveDelete($dir_path.'transition.png');
+
   }
   	
 
