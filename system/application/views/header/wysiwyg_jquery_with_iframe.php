@@ -13,8 +13,8 @@
 								$('#edit_product').fancyZoom().click(function(event) {
 										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_form_to_add_or_edit_product/' + $('#product_id').val() + '/' +  $('#content_id').val());
 								});		
-								$('#jcrop_product_image').fancyZoom().click(function(event) {
-										$("#iframe_content_text").attr('src','<?php echo base_url();    ?>index.php/page/iframe_jcrop_form/' + $('#product_id').val() );
+								$('#jcrop_product_image').fancyZoom().click(function(event) {  // Found in: line 34 header/top_view.php
+										$("#iframe_content_image").attr('src','<?php echo base_url();    ?>index.php/page/iframe_jcrop_form/' + $('#product_id').val() );
 								});										
 								
 															
@@ -98,7 +98,7 @@
 					function open_jcrop(){
 						
 						setTimeout(function() { 											
-							$('#jcrop_product_image').click();			
+							$('#jcrop_product_image').click();	//FOUND:line 16  header/wysiwyg_jquery_with_iframe.php		
 						}, 500);	
 						
 					};		

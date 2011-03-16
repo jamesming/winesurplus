@@ -212,33 +212,21 @@
 	
 	<?php  $this->load->view('footer/footer.php');   ?>
 
-	<div id="product_image"  style='height:60px;display:none'  >
+	<div id="product_image"  style='height:560px;display:none'  >
 		<iframe  id="iframe_content_image"   style="
-			width:400px;
-			height:40px;
+			width:750px;
+			height:560px;
 			margin: 0; 
 			padding: 0; 
 			border: 0px solid black;
 			" 
-			frameborder="0" src=""   >
+			frameborder="0" src=""  scrolling="yes"  >
 			
 		    <p>Your browser does not support iframes.</p>
 		    
 		</iframe>
 	</div>	
-	
-<div   style='visibility:hidden'  >	 
-	
-		<form   id='uploadForm' name='uploadForm' action='<?php echo  base_url();   ?>index.php/page/upload_image/' 
-			method='post' 
-			enctype='multipart/form-data'>
-			<input name="product_id" id="product_id" type="hidden" value="<?php echo $contents[0]->product_id;    ?>">	
-			<input id='select_file' type="file" name="Filedata" size="20"     />
-			<input  type="submit" value="submit">
-		</form>
- 		
-	
-</div>
+
 
 	
 	

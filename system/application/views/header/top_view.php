@@ -4,10 +4,6 @@
 	
 					$(document).ready(function() { 
 						
-
-						
-
-						
 						$('#hack_to_fix_chrome_bug').val(1);	
 											
 					});
@@ -35,7 +31,7 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 </div>
 <div id='edit_product'  href='#wysiwyg_div'  style='display:none'  >
 </div>
-<div id='jcrop_product_image'  href='#wysiwyg_div'  style='display:none'  >
+<div id='jcrop_product_image'  href='#product_image'  style='display:none'  >
 </div>
 
 		<style>	
