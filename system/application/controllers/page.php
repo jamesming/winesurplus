@@ -110,6 +110,14 @@ class Page extends Controller {
 		$default_content = $this->my_database_model->select_from_table( $table = 'default_content', $select_what, $where_array );
 
 
+
+		// ** Delete transitional image
+
+		$directory_path = 'uploads/product_images/' . $contents[0]->product_id  . '/transition.png';
+		
+		$this->tools->recursiveDelete($directory_path);
+
+
 		$data = array( 'default_content' => $default_content, 'contents' => $contents);
 		$this->load->view('page/index_view', $data);
 	
@@ -755,7 +763,7 @@ function upload_image(){
 	$config['upload_path'] = './' . $upload_path;
 	$config['allowed_types'] = 'bmp|jpeg|gif|jpg|png';
 	$config['overwrite'] = 'TRUE';
-	$config['file_name'] = 'image.png';
+	$config['file_name'] = 'transition.png';
 
 	
 	$this->load->library('upload', $config);
@@ -773,7 +781,7 @@ function upload_image(){
 	{	
 		
 		
-		$this->tools->resize_this(  $full_path = 'uploads/product_images/' . $this->input->post('product_id') . '/image.png' , $width = 442, $height=412);
+		// $this->tools->resize_this(  $full_path = 'uploads/product_images/' . $this->input->post('product_id') . '/image.png' , $width = 442, $height=412);
 		
 		$data= array('product_id' => $this->input->post('product_id'));
 		
@@ -976,7 +984,7 @@ function update_contents_with_date(){
 		
 			$dir_path = 'uploads/product_images/' . $this->uri->segment(3);
 			
-			$image_information = getimagesize($dir_path . '/' . 'image.png');
+			$image_information = getimagesize($dir_path . '/' . 'transition.png');
 			
 			$width_of_file = $image_information[0];
 			$height_of_file = $image_information[1];
@@ -1014,7 +1022,7 @@ function update_contents_with_date(){
 		$width = $this->input->post('width');
 		$height = $this->input->post('height');
 
-		$this->tools->crop_and_name_it( $new_name = 'image.png', $dir_path.'image.png', $dir_path, $width, $height, $x_origin, $y_origin );
+		$this->tools->crop_and_name_it( $new_name = 'image.png', $dir_path.'transition.png', $dir_path, $width, $height, $x_origin, $y_origin );
     
   }
   	

@@ -118,7 +118,7 @@
 			'  >
 			
 						<div   style='width:<?php echo $width_of_file;    ?>px;margin-left:auto;margin-right:auto'  > 
-							<img   id='cropbox' src = '<?php  echo  base_url() . 'uploads/product_images/' . $product_id . '/image.png?random=' . rand(5,15);   ?>'>		
+							<img   id='cropbox' src = '<?php  echo  base_url() . 'uploads/product_images/' . $product_id . '/transition.png?random=' . rand(5,15);   ?>'>		
 						</div> 
 		
 		</td>
