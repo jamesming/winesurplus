@@ -36,10 +36,10 @@
 								price: $('#price').val(),
 								discount: $('#discount').val()
 							},function(data) {
-									window.parent.window.parent.top_edit_frame.$('#product_id').html(  data  );
+									window.parent.window.parent.top_edit_frame.$('#product_id').html(  data  );  // resets the select
 									window.parent.$('#product_id').val(  window.parent.window.parent.top_edit_frame.$('#product_id option:selected').val()  ); 
 									window.parent.$('#content_id').val( window.parent.window.parent.top_edit_frame.$('#product_id option:selected').attr('content_id')   );
-									window.parent.wysiwyg();
+									window.parent.wysiwyg();  // found in header/wysiwyg_jquery_with_iframe.php line 54
 									window.parent.$('body').click(); 
 							});		
 							

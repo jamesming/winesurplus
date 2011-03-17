@@ -805,6 +805,7 @@ function upload_image(){
 
 function does_product_image_exit(){
 	
+	
 	  if( !is_file($directory_path  =  'uploads/product_images/' . $this->input->post('product_id') . '/image.png' ) ){
         echo  'no_image';
     }
