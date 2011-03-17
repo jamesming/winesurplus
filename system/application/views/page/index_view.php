@@ -88,7 +88,7 @@
 							  		  if( !is_file('uploads/product_images/' . $contents[0]->product_id . '/image.png' ) ){
 				        				echo base_url() . "images/no_image.png?random=" . rand(5, 15);
 				    					}else{
-							  				echo base_url(). "uploads/product_images/" . $contents[0]->product_id . "/image.png";
+							  				echo base_url(). "uploads/product_images/" . $contents[0]->product_id . "/image.png?random=" . rand(5, 15);
 							  			}
 									
 									?>'>			
