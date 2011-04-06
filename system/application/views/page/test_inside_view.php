@@ -47,7 +47,7 @@ p {
 }
 
 ul {
-	padding:00 0 15px;
+	padding:0 0 0 15px;
 	margin:0}
 
 h1 {
@@ -174,8 +174,10 @@ solid #e7e7e7}
 #oneColumn{padding-top:5px;width:855px}
 #contentHome{padding:15px
 0 0;position:relative}
-#contentHome{-webkit-border-bottom-right-radius:8px;-webkit-border-bottom-left-radius:8px;-moz-border-radius-bottomright:8px;-moz-border-radius-bottomleft:8px;border-bottom-right-radius:8px;border-bottom-left-radius:8px;border-top:1px}#homeMiddle
-.right{-webkit-border-bottom-right-radius:8px;-moz-border-radius-bottomright:8px;border-bottom-right-radius:8px}#footer{text-align:center;padding:10px
+#contentHome{-webkit-border-bottom-right-radius:8px;-webkit-border-bottom-left-radius:8px;-moz-border-radius-bottomright:8px;-moz-border-radius-bottomleft:8px;border-bottom-right-radius:8px;border-bottom-left-radius:8px;border-top:1px}
+#homeMiddle
+.right{-webkit-border-bottom-right-radius:8px;-moz-border-radius-bottomright:8px;border-bottom-right-radius:8px}
+#footer{text-align:center;padding:10px
 0 25px 10px;margin:10px
 0 30px}
 #footer
@@ -269,8 +271,10 @@ small{color:#999;font-size:12px}#timeBarOut{background:url("<?php  echo base_url
 table{width:100%}#homeMiddle
 .left{padding:5px
 15px 25px}#homeMiddle
-.right{width:240px;padding:5px;border-left:1px solid #e6e6e6;background-color:#f3f3f3}#finePrint{margin:0
-0 15px}#finePrint
+.right{width:240px;padding:5px;border-left:1px solid #e6e6e6;background-color:#f3f3f3}
+#finePrint{margin:0
+0 15px}
+#finePrint
 h3{padding-right:10px;display:inline-block}#aboutCompany{border-top:2px solid #f3f3f3;padding-bottom:10px}#shopAt
 h3{font-size:14px;padding-bottom:3px}#shopAt
 img{border:1px
@@ -575,7 +579,7 @@ div.active{background:#826448;color:#fff;cursor:default}#tabHolder div.active a,
 
                                             
 
-                                            <div>
+                                            <div   >
 
                                                 <ul><li>We're celebrating our 3-month Pulpiversary with "Orange You Lucky?," which will hook you up with a mystery ZekeZoo credit 
 
@@ -637,7 +641,7 @@ div.active{background:#826448;color:#fff;cursor:default}#tabHolder div.active a,
 
                             <div id="shareThis"><div id="inviteFriendTxt" style="text-align: left; padding-left: 0px;"><strong>Earn ZekeZoo Credit Two Ways</strong><img src="/images/shareIcon.png" style="vertical-align:super"></div><div style="font-size: 12px; text-align: left; margin-bottom: 10px;">(but <a href="/signup">sign in</a>, first!)</div><strong>1. Share this deal</strong> <a href="/info/referral" style="font-size:12px;">(details)</a><div style="padding:5px 0px;"><table cellspacing="0" cellpadding="0"><tr><td><a name="fb_share" type="box_count" share_url="http://ZekeZoo.com/deal/ZekeZoo.com/110" href="http://www.facebook.com/sharer.php">Share</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script></td><td><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://ZekeZoo.com/deal/ZekeZoo.com/110" data-text="Orange You Lucky?: $1 for a $2, $5, $10, $25, $100, $500, or $1,000 ZekeZoo Credit" data-count="vertical" data-via="ZekeZoo">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></td><td><a href="/importContacts.php?c=share" class="shareEmail"></a>
 
-            </td></tr></table></div><strong>2. Invite your friends</strong> <a href="/info/referral" style="font-size:12px;">(details)</a></div><div id="tomorrowDeal"><h3>Wednesday's Deal </h3><div style="height:165px;"><a href="/discussion/98_106"><img style="position: absolute; left: 2px;" src="/img/deal/0/0/106_0_1301953105.png"></div><div><a href="/discussion/98_106" style="font-size:12px;">Guess this deal and win a $20 credit!</a></div></div>
+            </td></tr></table></div><strong>2. Invite your friends</strong> <a href="/info/referral" style="font-size:12px;">(details)</a></div><div id="tomorrowDeal"><h3>Wednesday's Deal </h3><div style="height:165px;"><a href="/discussion/98_106"><img style="position: absolute; left: 2px;" src="http://dealpulp.com/img/deal/0/0/106_0_1301953105.png"></div><div><a href="/discussion/98_106" style="font-size:12px;">Guess this deal and win a $20 credit!</a></div></div>
 
             <div id="emailSubBox">
 
