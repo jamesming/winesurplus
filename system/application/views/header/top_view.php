@@ -41,18 +41,8 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 		div#top div:nth-child(3){
 		background: lightgray;
 		}
-		div#top div:nth-child(1){
-		background: orange;
-		height:auto;
-		}
-		div#top div:nth-child(1) span{
-		margin:10px;
-		background: blue;
-		color:white;
-		text-align:center;
-		height:50px;
-		padding:7px 0px;
-		}		
+
+
 		div#top div:nth-child(3){
 		background: lightgray;
 		}
@@ -65,9 +55,9 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 		
 		<div id='top' class=' container'      >
 			<div  class='span-5 ' >
-				<span   >
-					logo
-				</span>
+
+					<img src='<?php echo base_url();    ?>images/Zekeszoo.jpg'>
+
 			</div>
 			<div  class='span-15 ' >
 				&nbsp;
@@ -104,14 +94,14 @@ div_id_to_edit: <input id="div_id_to_edit" type="text" value="">	<br>
 		}
 		div#howworks div:nth-child(even){
 			width:182px;
-			background:lightblue;
+			background:url(<?php echo base_url()    ?>images/cutout.png);
 			text-align:center;
-			color:white;
+			color:gray;
 			font-size:20px;
 		}
 		</style>
 		
-		<div   style='background:green'  >
+		<div   style='background:none'  >
 			
 					<div class=' container'  >		
 						<div id='howworks' >

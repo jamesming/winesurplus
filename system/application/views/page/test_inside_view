@@ -1,0 +1,17 @@
+<head>
+<?php     	$this->load->view('header/header_css.php');  ?>
+</head>
+
+	
+<body style='background:gray' >	
+
+		</style>
+		
+		<div id='top' class=' container'      >
+				Hey
+		</div>
+		
+
+</div>
+</body>
+

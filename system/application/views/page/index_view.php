@@ -15,26 +15,14 @@
 	</script>
 
 </head>
-<body>
+<body   style='background:url(<?php  echo base_url();   ?>images/dealpulp.gif) repeat'  >
 	
 
 	<?php  
 	$this->load->view('header/top_view.php');   
 	?>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		<hr   style='height:15px;background:darkred'  >
-		
+
 		<style>
 
 		div#main div:nth-child(1) div{

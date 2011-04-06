@@ -18,6 +18,8 @@ if( $_SERVER['HTTP_HOST'] == 'www.jamesming.com' ){
 	$config['base_url']	= "http://127.0.0.1/winesurplus";
 }elseif( $_SERVER['HTTP_HOST'] == 'www.grapegrab.com' ){
 	$config['base_url']	= "http://www.grapegrab.com";
+}elseif( $_SERVER['HTTP_HOST'] == 'localhost' ){
+	$config['base_url']	= "http://localhost/winesurplus";
 };
 
 
